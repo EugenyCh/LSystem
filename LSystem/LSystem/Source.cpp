@@ -29,7 +29,7 @@ vector<sf::Vertex> renderLSystem(string lsystem, double theta)
 			angle -= theta;
 			break;
 		default:
-			lines.push_back(sf::Vertex(sf::Vector2f(x, y), sf::Color(127, 127, 127)));
+			lines.push_back(sf::Vertex(sf::Vector2f(x, y), sf::Color(64, 64, 64)));
 			x += h * cos(angle);
 			y += h * sin(angle);
 			lines.push_back(sf::Vertex(sf::Vector2f(x, y), sf::Color(255, 255, 255)));
@@ -44,18 +44,15 @@ vector<sf::Vertex> renderLSystem(string lsystem, double theta)
 		}
 	}
 
-	double scale_x = WIDTH / (xmax - xmin);
-	double scale_y = HEIGHT / (ymax - ymin);
-	double x0 = (xmax + xmin) / 2;
-	double y0 = (ymax + ymin) / 2;
+	double scale = min(HEIGHT, WIDTH) / max(ymax - ymin, xmax - xmin);
 
 	for (int i = 0; i < lines.size(); ++i)
 	{
-		lines[i].position.x *= scale_x;
-		lines[i].position.x -= x0;
+		lines[i].position.x -= (xmax + xmin) / 2;
+		lines[i].position.x *= scale;
 		lines[i].position.x += WIDTH / 2;
-		lines[i].position.y *= scale_y;
-		lines[i].position.y -= y0;
+		lines[i].position.y -= (ymax + ymin) / 2;
+		lines[i].position.y *= scale;
 		lines[i].position.y += HEIGHT / 2;
 	}
 
@@ -67,8 +64,10 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "LSystem Window");
 	window.setFramerateLimit(2);
 
-	vector<sf::Vertex> lines;
-	lines = renderLSystem("F++F++F", M_PI / 3);
+	LSystem lsystem("F++F++F");
+	lsystem.set_rule('F', "F-F++F-F");
+
+	vector<sf::Vertex> lines = renderLSystem(lsystem.iterate(3), M_PI / 3);
 	sf::Vertex* vertices = lines.data();
 	size_t vlen = lines.size();
 
