@@ -91,11 +91,10 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "LSystem Window");
 	window.setFramerateLimit(2);
 
-	LSystem lsystem("F-F-F-F");
-	lsystem.set_rule('F', "F-b+FF-F-FF-Fb-FF+b-FF+F+FF+Fb+FFF");
-	lsystem.set_rule('b', "bbbbbb");
+	LSystem lsystem("f+f+f+f");
+	lsystem.set_rule('f', "ff+f+f+f+ff");
 
-	vector<sf::Vertex> lines = renderLSystem(lsystem.iterate(3), 0, M_PI / 2, "b");
+	vector<sf::Vertex> lines = renderLSystem(lsystem.iterate(5), 0, 90 * M_PI / 180);
 	sf::Vertex* vertices = lines.data();
 	size_t vlen = lines.size();
 
