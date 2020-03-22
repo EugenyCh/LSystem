@@ -6,10 +6,9 @@
 #define WIDTH 640
 #define HEIGHT 480
 
-vector<sf::Vertex> renderLSystem(string lsystem, double theta, string undrawables)
+vector<sf::Vertex> renderLSystem(string lsystem, double angle, double theta, string undrawables = "")
 {
 	vector<sf::Vertex> lines;
-	double angle = 0;
 	double h = 1.0;
 	double x, y;
 	x = y = 0;
@@ -29,7 +28,7 @@ vector<sf::Vertex> renderLSystem(string lsystem, double theta, string undrawable
 			angle -= theta;
 			break;
 		default:
-			if (undrawables.find(c) != string::npos)
+			if (undrawables.empty() || undrawables.find(c) != string::npos)
 			{
 				lines.push_back(sf::Vertex(sf::Vector2f(x, y), sf::Color(64, 64, 64)));
 				x += h * cos(angle);
@@ -67,11 +66,12 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "LSystem Window");
 	window.setFramerateLimit(2);
 
-	LSystem lsystem("FX");
-	lsystem.set_rule('X', "X+YF+");
-	lsystem.set_rule('Y', "-FX-Y");
+	LSystem lsystem("X");
+	lsystem.set_rule('F', "F");
+	lsystem.set_rule('X', "-YF+XFX+FY-");
+	lsystem.set_rule('Y', "+XF-YFY-FX+");
 
-	vector<sf::Vertex> lines = renderLSystem(lsystem.iterate(3), M_PI / 2, "XY");
+	vector<sf::Vertex> lines = renderLSystem(lsystem.iterate(6), 0, M_PI / 2);
 	sf::Vertex* vertices = lines.data();
 	size_t vlen = lines.size();
 
