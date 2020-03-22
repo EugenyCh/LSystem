@@ -6,7 +6,7 @@
 #define WIDTH 640
 #define HEIGHT 480
 
-vector<sf::Vertex> renderLSystem(string lsystem, double theta)
+vector<sf::Vertex> renderLSystem(string lsystem, double theta, string undrawables)
 {
 	vector<sf::Vertex> lines;
 	double angle = 0;
@@ -29,18 +29,21 @@ vector<sf::Vertex> renderLSystem(string lsystem, double theta)
 			angle -= theta;
 			break;
 		default:
-			lines.push_back(sf::Vertex(sf::Vector2f(x, y), sf::Color(64, 64, 64)));
-			x += h * cos(angle);
-			y += h * sin(angle);
-			lines.push_back(sf::Vertex(sf::Vector2f(x, y), sf::Color(255, 255, 255)));
-			if (x < xmin)
-				xmin = x;
-			if (x > xmax)
-				xmax = x;
-			if (y < ymin)
-				ymin = y;
-			if (y > ymax)
-				ymax = y;
+			if (undrawables.find(c) != string::npos)
+			{
+				lines.push_back(sf::Vertex(sf::Vector2f(x, y), sf::Color(64, 64, 64)));
+				x += h * cos(angle);
+				y += h * sin(angle);
+				lines.push_back(sf::Vertex(sf::Vector2f(x, y), sf::Color(255, 255, 255)));
+				if (x < xmin)
+					xmin = x;
+				if (x > xmax)
+					xmax = x;
+				if (y < ymin)
+					ymin = y;
+				if (y > ymax)
+					ymax = y;
+			}
 		}
 	}
 
@@ -64,17 +67,13 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "LSystem Window");
 	window.setFramerateLimit(2);
 
-	LSystem lsystem("F++F++F");
-	lsystem.set_rule('F', "F-F++F-F");
+	LSystem lsystem("FX");
+	lsystem.set_rule('X', "X+YF+");
+	lsystem.set_rule('Y', "-FX-Y");
 
-	vector<sf::Vertex> lines = renderLSystem(lsystem.iterate(3), M_PI / 3);
+	vector<sf::Vertex> lines = renderLSystem(lsystem.iterate(3), M_PI / 2, "XY");
 	sf::Vertex* vertices = lines.data();
 	size_t vlen = lines.size();
-
-	for (int i = 0; i < vlen; ++i)
-	{
-		cout << "(" << vertices[i].position.x << ", " << vertices[i].position.y << ")" << endl;
-	}
 
 	while (window.isOpen())
 	{
