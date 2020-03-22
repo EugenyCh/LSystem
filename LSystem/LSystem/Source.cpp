@@ -8,7 +8,7 @@ int main()
 	auto lsystem = LSystem("X");
 	lsystem.set_rule('X', "X+Y+");
 	lsystem.set_rule('Y', "-X-Y");
-	cout << lsystem.iterate(3, true) << endl;
+	cout << lsystem.iterate(3) << endl;
 
 	return 0;
 }

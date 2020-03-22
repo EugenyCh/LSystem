@@ -14,6 +14,6 @@ public:
 	LSystem(string);
 	void set_axiom(string);
 	bool set_rule(char, string);
-	string iterate(int, bool);
+	string iterate(int, bool=false);
 };
 
