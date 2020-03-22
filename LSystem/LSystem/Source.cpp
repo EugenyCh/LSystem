@@ -2,6 +2,7 @@
 #include "LSystem.h"
 #include <cmath>
 #include <iostream>
+#include <stack>
 #include <SFML/Graphics.hpp>
 #define WIDTH 640
 #define HEIGHT 480
@@ -15,6 +16,8 @@ vector<sf::Vertex> renderLSystem(string lsystem, double angle, double theta, str
 	double xmin, xmax, ymin, ymax;
 	xmin = xmax = 0;
 	ymin = ymax = 0;
+	stack<double> stack_x, stack_y, stack_a;
+	int stack_depth = 0;
 
 	for (int i = 0; i < lsystem.length(); ++i)
 	{
@@ -27,8 +30,25 @@ vector<sf::Vertex> renderLSystem(string lsystem, double angle, double theta, str
 		case '-':
 			angle -= theta;
 			break;
+		case '[':
+			stack_a.push(angle);
+			stack_x.push(x);
+			stack_y.push(y);
+			++stack_depth;
+			break;
+		case ']':
+			if (stack_depth < 1)
+				break;
+			angle = stack_a.top();
+			x = stack_x.top();
+			y = stack_y.top();
+			stack_a.pop();
+			stack_x.pop();
+			stack_y.pop();
+			--stack_depth;
+			break;
 		default:
-			if (undrawables.empty() || undrawables.find(c) != string::npos)
+			if (undrawables.empty() || undrawables.find(c) == string::npos)
 			{
 				lines.push_back(sf::Vertex(sf::Vector2f(x, y), sf::Color(64, 64, 64)));
 				x += h * cos(angle);
@@ -42,6 +62,11 @@ vector<sf::Vertex> renderLSystem(string lsystem, double angle, double theta, str
 					ymin = y;
 				if (y > ymax)
 					ymax = y;
+			}
+			else
+			{
+				x += h * cos(angle);
+				y += h * sin(angle);
 			}
 		}
 	}
@@ -66,12 +91,11 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "LSystem Window");
 	window.setFramerateLimit(2);
 
-	LSystem lsystem("X");
-	lsystem.set_rule('F', "F");
-	lsystem.set_rule('X', "-YF+XFX+FY-");
-	lsystem.set_rule('Y', "+XF-YFY-FX+");
+	LSystem lsystem("F-F-F-F");
+	lsystem.set_rule('F', "F-b+FF-F-FF-Fb-FF+b-FF+F+FF+Fb+FFF");
+	lsystem.set_rule('b', "bbbbbb");
 
-	vector<sf::Vertex> lines = renderLSystem(lsystem.iterate(6), 0, M_PI / 2);
+	vector<sf::Vertex> lines = renderLSystem(lsystem.iterate(3), 0, M_PI / 2, "b");
 	sf::Vertex* vertices = lines.data();
 	size_t vlen = lines.size();
 
