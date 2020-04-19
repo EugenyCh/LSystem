@@ -5,12 +5,14 @@
 
 Vector3D eye(5, 0, 0); // camera position
 Vector3D rot(0, -90, 0);
+Vector3D camSh(0, 0, 0); // camera shift
 int mouseOldX = 0;
 int mouseOldY = 0;
 LSystem lsystem;
 unsigned systemList = 0; // display list to draw system
-int numIterations = 0;	 // current # of iterations to draw system
+int numIterations = 3;	 // current # of iterations to draw system
 float zoom = 1.0f;
+int winWidth, winHeight;
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -24,8 +26,10 @@ void init()
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }
 
+void reshape(int, int);
 void display()
 {
+    reshape(winWidth, winHeight);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_MODELVIEW);
@@ -60,13 +64,16 @@ void display()
 
 void reshape(int w, int h)
 {
+    winWidth = w;
+    winHeight = h;
     glViewport(0, 0, (GLsizei)w, (GLsizei)h);
     glMatrixMode(GL_PROJECTION);
     // factor all camera ops into projection matrix
     glLoadIdentity();
     gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 1.0, 60.0);
-    gluLookAt(eye.x, eye.y, eye.z, // eye
-        0, 0, 0,			   // center
+    Vector3D e = eye + camSh;
+    gluLookAt(e.x, e.y, e.z, // eye
+        camSh.x, camSh.y, camSh.z, // center
         0.0, 0.0, 1.0);	   // up
 
     glMatrixMode(GL_MODELVIEW);
@@ -111,40 +118,61 @@ void mouseWheel(int wheel, int direction, int x, int y)
     wheel = 0;
     if (direction == -1)
     {
-        zoom -= 0.1;
+        zoom -= 0.1f;
 
     }
     else if (direction == +1)
     {
-        zoom += 0.1;
+        zoom += 0.1f;
+    }
+
+    glutPostRedisplay();
+}
+
+void processSpecialKeys(int key, int x, int y) {
+    switch (key) {
+    case GLUT_KEY_UP:
+        camSh.z += 0.1f;
+        break;
+    case GLUT_KEY_DOWN:
+        camSh.z -= 0.1f;
+        break;
+    case GLUT_KEY_LEFT:
+        camSh.y -= 0.1f;
+        break;
+    case GLUT_KEY_RIGHT:
+        camSh.y += 0.1f;
+        break;
     }
 
     glutPostRedisplay();
 }
 
 
-void key(unsigned char key, int x, int y)
+void processKey(unsigned char key, int x, int y)
 {
     if (key == 27 || key == 'q' || key == 'Q') //	quit requested
         exit(0);
 
-    if (key == '+') // increment # of iterations
+    switch (key)
     {
+    case '+': // increment # of iterations
         glDeleteLists(systemList, 1);
         systemList = 0;
         numIterations++;
-        glutPostRedisplay();
-    }
-    else if (key == '-') // decrement # of iterations
-    {
+        break;
+    case '-': // decrement # of iterations
         glDeleteLists(systemList, 1);
         systemList = 0;
-
         if (numIterations > 0)
             numIterations--;
-
-        glutPostRedisplay();
+        break;
+    case '=':
+        camSh = Vector3D(0, 0, 0);
+        break;
     }
+
+    glutPostRedisplay();
 }
 
 int main(int argc, char* argv[])
@@ -160,7 +188,8 @@ int main(int argc, char* argv[])
     // register handlers
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
-    glutKeyboardFunc(key);
+    glutSpecialFunc(processSpecialKeys);
+    glutKeyboardFunc(processKey);
     glutMouseFunc(mouse);
     glutMouseWheelFunc(mouseWheel);
     glutMotionFunc(motion);

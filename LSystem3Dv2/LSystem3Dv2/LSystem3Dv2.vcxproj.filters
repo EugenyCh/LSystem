@@ -35,10 +35,10 @@
     <ClCompile Include="Vector3D.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="LSystem.cpp">
+    <ClCompile Include="Matrix3D.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Matrix3D.cpp">
+    <ClCompile Include="LSystem.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

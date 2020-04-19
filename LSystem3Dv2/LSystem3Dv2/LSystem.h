@@ -32,12 +32,12 @@ class LSystem
 public:
     LSystem();
 
-    void setInitialString(const char* str)
+    void setInitialString(const char *str)
     {
         initialString = str;
     }
 
-    void addRule(char symbol, const char* rule)
+    void addRule(char symbol, const char *rule)
     {
         rules[symbol] = rule;
     }
@@ -47,7 +47,7 @@ public:
         angle = newAngle;
     }
 
-    const string& getCurrentString() const
+    const string &getCurrentString() const
     {
         return currentString;
     }
@@ -62,7 +62,7 @@ public:
         angleScale = scale;
     }
 
-    void interpretString(const string& str);
+    void interpretString(const string &str);
     void buildSystem(int numIterations);
 
     void draw()
@@ -70,19 +70,19 @@ public:
         interpretString(currentString);
     }
 
-    const BoundingBox& getBounds() const
+    const BoundingBox &getBounds() const
     {
         return bounds;
     }
 
 protected:
-    string oneStep(const string& in) const;
-    Vector3D step(const State& state) const
+    string oneStep(const string &in) const;
+    Vector3D step(const State &state) const
     {
         return Matrix3D::rotateZ(state.angles.z) * Matrix3D::rotateY(state.angles.y) *
-            Matrix3D::rotateX(state.angles.x) * state.dir;
+               Matrix3D::rotateX(state.angles.x) * state.dir;
     }
 
-    virtual void drawLine(const Vector3D& p1, const Vector3D& p2, int level) const;
-    virtual void updateState(State& state, const Vector3D& dir, int level) const;
+    virtual void drawLine(const Vector3D &p1, const Vector3D &p2, int level) const;
+    virtual void updateState(State &state, const Vector3D &dir, int level) const;
 };

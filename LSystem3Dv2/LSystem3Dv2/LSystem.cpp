@@ -10,7 +10,7 @@ LSystem::LSystem()
     angleScale = 1;
 }
 
-void LSystem::interpretString(const string& str)
+void LSystem::interpretString(const string &str)
 {
     State state;
     stack<State> st;
@@ -94,7 +94,7 @@ void LSystem::buildSystem(int numIterations)
     }
 }
 
-string LSystem::oneStep(const string& in) const
+string LSystem::oneStep(const string &in) const
 {
     string out;
     map<char, string>::const_iterator it;
@@ -112,7 +112,7 @@ string LSystem::oneStep(const string& in) const
     return out;
 }
 
-void LSystem::drawLine(const Vector3D& p1, const Vector3D& p2, int level) const
+void LSystem::drawLine(const Vector3D &p1, const Vector3D &p2, int level) const
 {
     glBegin(GL_LINES);
     glVertex3fv(p1);
@@ -120,7 +120,7 @@ void LSystem::drawLine(const Vector3D& p1, const Vector3D& p2, int level) const
     glEnd();
 }
 
-void LSystem::updateState(State& state, const Vector3D& dir, int level) const
+void LSystem::updateState(State &state, const Vector3D &dir, int level) const
 {
     state.pos += dir;
     state.dir *= distScale;
