@@ -28,7 +28,6 @@
     <ClCompile Include="LSystem.cpp" />
     <ClCompile Include="Matrix3D.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Source1.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
