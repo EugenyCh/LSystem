@@ -1,4 +1,5 @@
-#include <GL/glut.h>
+#include <GL/freeglut.h>
+#include <GL/freeglut_ext.h>
 #include <stdio.h>
 #include "LSystem.h"
 
@@ -9,6 +10,7 @@ int mouseOldY = 0;
 LSystem lsystem;
 unsigned systemList = 0; // display list to draw system
 int numIterations = 0;	 // current # of iterations to draw system
+float zoom = 1.0f;
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -32,6 +34,7 @@ void display()
     glRotatef(rot.x, 1, 0, 0);
     glRotatef(rot.y, 0, 1, 0);
     glRotatef(rot.z, 0, 0, 1);
+    glScalef(zoom, zoom, zoom);
 
     if (systemList == 0) // no display list yet, build it )
     {
@@ -103,6 +106,23 @@ void mouse(int button, int state, int x, int y)
     }
 }
 
+void mouseWheel(int wheel, int direction, int x, int y)
+{
+    wheel = 0;
+    if (direction == -1)
+    {
+        zoom -= 0.1;
+
+    }
+    else if (direction == +1)
+    {
+        zoom += 0.1;
+    }
+
+    glutPostRedisplay();
+}
+
+
 void key(unsigned char key, int x, int y)
 {
     if (key == 27 || key == 'q' || key == 'Q') //	quit requested
@@ -142,6 +162,7 @@ int main(int argc, char* argv[])
     glutReshapeFunc(reshape);
     glutKeyboardFunc(key);
     glutMouseFunc(mouse);
+    glutMouseWheelFunc(mouseWheel);
     glutMotionFunc(motion);
 
     init();
