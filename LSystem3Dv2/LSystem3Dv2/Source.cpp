@@ -234,9 +234,9 @@ int main(int argc, char* argv[])
     //lsystem.addRule('F', "F[-F]<[F]>[+F][F]");
     //lsystem.setDistScale(0.75);
 
-    //lsystem.setInitialString("A");
-    //lsystem.addRule('A', " [+FA][-FA][>FA][<FA]");
-    //lsystem.setDistScale(0.75);
+    lsystem.setInitialString("A");
+    lsystem.addRule('A', " [+FA][-FA][>FA][<FA]");
+    lsystem.setDistScale(0.75);
 
     //lsystem.setInitialString("AB");
     //lsystem.addRule('A', "[F[+FA][-FA]]");
@@ -248,16 +248,14 @@ int main(int argc, char* argv[])
     //lsystem.setDistScale     ( 0.75 );
 
     // Koch island
-    /*lsystem.setInitialString ( "F+F+F+F" );
-        lsystem.addRule          ( 'F', "F+F-F-FF+F+F-F" );
-        lsystem.setDistScale     ( 1 );
-        lsystem.setAngle         ( M_PI / 2 );*/
+    //lsystem.setInitialString ( "F+F+F+F" );
+    //lsystem.addRule          ( 'F', "F+F-F-FF+F+F-F" );
+    //lsystem.setDistScale     ( 1 );
+    //lsystem.setAngle         ( M_PI / 2 );
 
-        //lsystem.setInitialString ( "F" );
-        //lsystem.addRule          ( 'F', "F[-F]F[+F][F]" );
-        //lsystem.setAngle         ( M_PI / 6 );
-
-        //	lsystem.buildSystem ( numIterations );
+    //lsystem.setInitialString ( "F" );
+    //lsystem.addRule          ( 'F', "F[-F]F[+F][F]" );
+    //lsystem.setAngle         ( M_PI / 6 );
 
     glutMainLoop();
 
