@@ -5,7 +5,8 @@
 #include "LSystem.h"
 
 Vector3D rot(0, -90, 0);
-Vector3D camSh(0, 0, 0); // camera shift
+float camRotH, camRotV;
+float camShH, camShV; // camera shift
 int mouseOldX = 0;
 int mouseOldY = 0;
 LSystem lsystem;
@@ -14,8 +15,6 @@ int numIterations = 3;	 // current # of iterations to draw system
 float zoom = 1.0f;
 int winWidth, winHeight;
 bool saving = false;
-float lookAngleH = 0.0f;
-float lookAngleV = 0.0f;
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -40,8 +39,8 @@ void display()
     glPushMatrix();
 
     glRotatef(rot.x, 1, 0, 0);
-    glRotatef(rot.y, 0, 1, 0);
-    glRotatef(rot.z, 0, 0, 1);
+    glRotatef(rot.y + camRotV, 0, 1, 0);
+    glRotatef(rot.z + camRotH, 0, 0, 1);
     glScalef(zoom, zoom, zoom);
 
     if (systemList == 0) // no display list yet, build it )
@@ -80,13 +79,10 @@ void reshape(int w, int h)
     // factor all camera ops into projection matrix
     glLoadIdentity();
     gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 1.0, 60.0);
-    Vector3D eye;
-    eye.x = (cosf(lookAngleH) + sinf(lookAngleH)) * cosf(lookAngleV);
-    eye.y = (cosf(lookAngleH) - sinf(lookAngleH)) * cosf(lookAngleV);
-    eye.z = sqrtf(2) * sinf(lookAngleV);
-    eye *= 5.f;
+    Vector3D eye(5, 0, 0);
+    eye += Vector3D(0, camShH, camShV);
     gluLookAt(eye.x, eye.y, eye.z, // eye
-        0.0, 0.0, 0.0, // center
+        0.0, camShH, camShV, // center
         0.0, 0.0, 1.0);	// up
 
     glMatrixMode(GL_MODELVIEW);
@@ -145,16 +141,16 @@ void mouseWheel(int wheel, int direction, int x, int y)
 void processSpecialKeys(int key, int x, int y) {
     switch (key) {
     case GLUT_KEY_UP:
-        camSh.z += 0.1f;
+        camShV += 0.1f;
         break;
     case GLUT_KEY_DOWN:
-        camSh.z -= 0.1f;
+        camShV -= 0.1f;
         break;
     case GLUT_KEY_LEFT:
-        camSh.x -= 0.1f;
+        camShH -= 0.1f;
         break;
     case GLUT_KEY_RIGHT:
-        camSh.x += 0.1f;
+        camShH += 0.1f;
         break;
     }
 
@@ -180,23 +176,24 @@ void processKey(unsigned char key, int x, int y)
             numIterations--;
         break;
     case '=':
-        camSh = Vector3D(0, 0, 0);
+        camShH = 0.0f;
+        camShV = 0.0f;
         break;
     case 'S':
     case 's':
         saving = true;
         break;
     case '8':
-        lookAngleV += M_PI / 32;
+        camRotV += 2.0f;
         break;
     case '2':
-        lookAngleV -= M_PI / 32;
+        camRotV -= 2.0f;
         break;
     case '4':
-        lookAngleH -= M_PI / 32;
+        camRotH -= 2.0f;
         break;
     case '6':
-        lookAngleH += M_PI / 32;
+        camRotH += 2.0f;
         break;
     }
 
