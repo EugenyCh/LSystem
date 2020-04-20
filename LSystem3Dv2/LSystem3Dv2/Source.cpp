@@ -1,5 +1,6 @@
 #include <GL/freeglut.h>
 #include <GL/freeglut_ext.h>
+#include <FreeImage.h>
 #include <stdio.h>
 #include "LSystem.h"
 
@@ -13,6 +14,7 @@ unsigned systemList = 0; // display list to draw system
 int numIterations = 3;	 // current # of iterations to draw system
 float zoom = 1.0f;
 int winWidth, winHeight;
+bool saving = false;
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -27,6 +29,7 @@ void init()
 }
 
 void reshape(int, int);
+void saveImage();
 void display()
 {
     reshape(winWidth, winHeight);
@@ -60,6 +63,11 @@ void display()
 
     glPopMatrix();
     glutSwapBuffers();
+    if (saving)
+    {
+        saving = false;
+        saveImage();
+    }
 }
 
 void reshape(int w, int h)
@@ -148,7 +156,6 @@ void processSpecialKeys(int key, int x, int y) {
     glutPostRedisplay();
 }
 
-
 void processKey(unsigned char key, int x, int y)
 {
     if (key == 27 || key == 'q' || key == 'Q') //	quit requested
@@ -170,9 +177,30 @@ void processKey(unsigned char key, int x, int y)
     case '=':
         camSh = Vector3D(0, 0, 0);
         break;
+    case 'S':
+    case 's':
+        saving = true;
+        break;
     }
 
     glutPostRedisplay();
+}
+
+void saveImage()
+{
+    size_t width = winWidth;
+    size_t height = winHeight;
+    BYTE* pixels = new BYTE[3 * width * height];
+
+    glReadPixels(0, 0, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, pixels);
+
+    // Convert to FreeImage format & save to file
+    FIBITMAP* image = FreeImage_ConvertFromRawBits(pixels, width, height, 3 * width, 24, 0x0000FF, 0xFF0000, 0x00FF00, false);
+    FreeImage_Save(FIF_PNG, image, "image.png", 0);
+
+    // Free resources
+    FreeImage_Unload(image);
+    delete[] pixels;
 }
 
 int main(int argc, char* argv[])
