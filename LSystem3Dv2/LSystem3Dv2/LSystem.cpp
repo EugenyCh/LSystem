@@ -22,8 +22,31 @@ void LSystem::interpretString(const string &str)
     state.angle = angle;
     state.invert = 1;
 
+    int maxLevel = 0;
+    int level = 0;
     for (int i = 0; i < str.length(); i++)
     {
+        switch (str[i])
+        {
+        case '[':
+            ++level;
+            break;
+
+        case ']':
+            --level;
+            break;
+        }
+        if (level > maxLevel)
+            maxLevel = level;
+    }
+
+    for (int i = 0; i < str.length(); i++)
+    {
+        float k;
+        if (maxLevel > 0)
+            k = 1.0f * st.size() / maxLevel;
+        else
+            k = 1.0f;
         switch (str[i])
         {
         case '[': // push state
@@ -39,14 +62,14 @@ void LSystem::interpretString(const string &str)
             d = step(state);
             bounds.addVertex(state.pos);
             bounds.addVertex(state.pos + d);
-            drawLine(state.pos, state.pos + d, st.size());
-            updateState(state, d, st.size());
+            drawLine(state.pos, state.pos + d, k);
+            updateState(state, d, k);
             break;
 
         case 'f':
             bounds.addVertex(state.pos);
             bounds.addVertex(state.pos + d);
-            updateState(state, step(state), st.size());
+            updateState(state, step(state), k);
             break;
 
         case '!': // inverse + and - meaing (just as for & and ^ and < and >)
@@ -112,9 +135,10 @@ string LSystem::oneStep(const string &in) const
     return out;
 }
 
-void LSystem::drawLine(const Vector3D &p1, const Vector3D &p2, int level) const
+void LSystem::drawLine(const Vector3D &p1, const Vector3D &p2, float k) const
 {
-    double k = (float)level / (3.5f + (float)level);
+    // k in [0; 1]
+    glLineWidth(4.f - 3.f * k);
     glBegin(GL_LINES);
     glColor3f(1.f - k, k, 0.f);
     glVertex3fv(p1);
@@ -122,7 +146,7 @@ void LSystem::drawLine(const Vector3D &p1, const Vector3D &p2, int level) const
     glEnd();
 }
 
-void LSystem::updateState(State &state, const Vector3D &dir, int level) const
+void LSystem::updateState(State &state, const Vector3D &dir, float k) const
 {
     state.pos += dir;
     state.dir *= distScale;

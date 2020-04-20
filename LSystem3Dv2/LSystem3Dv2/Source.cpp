@@ -249,9 +249,9 @@ int main(int argc, char* argv[])
     //lsystem.addRule ( 'X', "F[+X][-X]FX" );
     //lsystem.addRule ( 'F', "FF"          );
 
-    //lsystem.setInitialString ( "X" );
-    //lsystem.addRule ( 'X', "F-[[X]+X]+F[+FX]-X" );
-    //lsystem.addRule ( 'F', "FF"          );
+    //lsystem.setInitialString("X");
+    //lsystem.addRule('X', "F-[[X]+X]+F[+FX]-X");
+    //lsystem.addRule('F', "FF");
 
     //lsystem.addRule ( 'F', "F[-&<F][<++&F]||F[--&>F]" );
     //lsystem.setDistScale     ( 0.75 );
@@ -262,14 +262,14 @@ int main(int argc, char* argv[])
     //lsystem.addRule('F', "F[-F]<[F]>[+F][F]");
     //lsystem.setDistScale(0.75);
 
-    lsystem.setInitialString("A");
-    lsystem.addRule('A', " [+FA][-FA][>FA][<FA]");
-    lsystem.setDistScale(0.75);
-
-    //lsystem.setInitialString("AB");
-    //lsystem.addRule('A', "[F[+FA][-FA]]");
-    //lsystem.addRule('B', " [F[>FB][<FB]]");
+    //lsystem.setInitialString("A");
+    //lsystem.addRule('A', " [+FA][-FA][>FA][<FA]");
     //lsystem.setDistScale(0.75);
+
+    lsystem.setInitialString("AB");
+    lsystem.addRule('A', "[F[+FA][-FA]]");
+    lsystem.addRule('B', " [F[>FB][<FB]]");
+    lsystem.setDistScale(0.75);
 
     //lsystem.setInitialString ( "X" );
     //lsystem.addRule          ( 'X',  "F[++X]-F[--X]X" );

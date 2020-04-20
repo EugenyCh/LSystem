@@ -83,6 +83,6 @@ protected:
                Matrix3D::rotateX(state.angles.x) * state.dir;
     }
 
-    virtual void drawLine(const Vector3D &p1, const Vector3D &p2, int level) const;
-    virtual void updateState(State &state, const Vector3D &dir, int level) const;
+    virtual void drawLine(const Vector3D &p1, const Vector3D &p2, float k) const;
+    virtual void updateState(State &state, const Vector3D &dir, float k) const;
 };
