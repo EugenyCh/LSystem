@@ -184,10 +184,10 @@ void processKey(unsigned char key, int x, int y)
         saving = true;
         break;
     case '8':
-        camRotV += 2.0f;
+        camRotV -= 2.0f;
         break;
     case '2':
-        camRotV -= 2.0f;
+        camRotV += 2.0f;
         break;
     case '4':
         camRotH -= 2.0f;
@@ -280,20 +280,20 @@ int main(int argc, char* argv[])
     //lsystem.addRule('A', " [+FA][-FA][>FA][<FA]");
     //lsystem.setDistScale(0.75);
 
-    lsystem.setInitialString("AB");
-    lsystem.addRule('A', "[F[+FA][-FA]]");
-    lsystem.addRule('B', " [F[>FB][<FB]]");
-    lsystem.setDistScale(0.75);
+    //lsystem.setInitialString("AB");
+    //lsystem.addRule('A', "[F[+FA][-FA]]");
+    //lsystem.addRule('B', " [F[>FB][<FB]]");
+    //lsystem.setDistScale(0.75);
 
     //lsystem.setInitialString ( "X" );
     //lsystem.addRule          ( 'X',  "F[++X]-F[--X]X" );
     //lsystem.setDistScale     ( 0.75 );
 
     // Koch island
-    //lsystem.setInitialString ( "F+F+F+F" );
-    //lsystem.addRule          ( 'F', "F+F-F-FF+F+F-F" );
-    //lsystem.setDistScale     ( 1 );
-    //lsystem.setAngle         ( M_PI / 2 );
+    lsystem.setInitialString ( "F+F+F+F" );
+    lsystem.addRule          ( 'F', "F+F-F-FF+F+F-F" );
+    lsystem.setDistScale     ( 1 );
+    lsystem.setAngle         ( M_PI / 2 );
 
     //lsystem.setInitialString ( "F" );
     //lsystem.addRule          ( 'F', "F[-F]F[+F][F]" );
