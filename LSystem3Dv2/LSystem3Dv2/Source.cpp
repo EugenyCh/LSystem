@@ -116,7 +116,7 @@ void mouse(int button, int state, int x, int y)
 void mouseWheel(int wheel, int direction, int x, int y)
 {
     wheel = 0;
-    if (direction == -1)
+    if (direction == -1 && zoom > 0.1f)
     {
         zoom -= 0.1f;
 
@@ -234,21 +234,18 @@ int main(int argc, char* argv[])
     //lsystem.addRule('F', "F[-F]<[F]>[+F][F]");
     //lsystem.setDistScale(0.75);
 
-    // very nice
-    /*	lsystem.setInitialString (  "A" );
-        lsystem.addRule ( 'A', " [+cBFA][-cBFA][>cBFA][<cBFA]" );
-        lsystem.setDistScale     ( 0.75 );*/
+    //lsystem.setInitialString("A");
+    //lsystem.addRule('A', " [+FA][-FA][>FA][<FA]");
+    //lsystem.setDistScale(0.75);
 
-    lsystem.setInitialString("AB");
-    lsystem.addRule('A', "[F[+FCA][-FCA]]");
-    lsystem.addRule('B', " [F[>FCB][<FCB]]");
-    lsystem.setDistScale(0.75);
+    //lsystem.setInitialString("AB");
+    //lsystem.addRule('A', "[F[+FA][-FA]]");
+    //lsystem.addRule('B', " [F[>FB][<FB]]");
+    //lsystem.setDistScale(0.75);
 
-    /*
-        lsystem.setInitialString ( "X" );
-        lsystem.addRule          ( 'X',  "F[++X]-F[--X]X" );
-        lsystem.setDistScale     ( 0.75 );
-    */
+    //lsystem.setInitialString ( "X" );
+    //lsystem.addRule          ( 'X',  "F[++X]-F[--X]X" );
+    //lsystem.setDistScale     ( 0.75 );
 
     // Koch island
     /*lsystem.setInitialString ( "F+F+F+F" );

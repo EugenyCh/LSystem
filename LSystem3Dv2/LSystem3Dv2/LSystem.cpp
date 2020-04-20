@@ -114,7 +114,9 @@ string LSystem::oneStep(const string &in) const
 
 void LSystem::drawLine(const Vector3D &p1, const Vector3D &p2, int level) const
 {
+    double k = (float)level / (5.f + (float)level);
     glBegin(GL_LINES);
+    glColor3f(1.f - k, k, k);
     glVertex3fv(p1);
     glVertex3fv(p2);
     glEnd();
