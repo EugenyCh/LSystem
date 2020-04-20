@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include "LSystem.h"
 
-Vector3D eye(5, 0, 0); // camera position
 Vector3D rot(0, -90, 0);
 Vector3D camSh(0, 0, 0); // camera shift
 int mouseOldX = 0;
@@ -15,6 +14,8 @@ int numIterations = 3;	 // current # of iterations to draw system
 float zoom = 1.0f;
 int winWidth, winHeight;
 bool saving = false;
+float lookAngleH = 0.0f;
+float lookAngleV = 0.0f;
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -79,10 +80,14 @@ void reshape(int w, int h)
     // factor all camera ops into projection matrix
     glLoadIdentity();
     gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 1.0, 60.0);
-    Vector3D e = eye + camSh;
-    gluLookAt(e.x, e.y, e.z, // eye
-        camSh.x, camSh.y, camSh.z, // center
-        0.0, 0.0, 1.0);	   // up
+    Vector3D eye;
+    eye.x = (cosf(lookAngleH) + sinf(lookAngleH)) * cosf(lookAngleV);
+    eye.y = (cosf(lookAngleH) - sinf(lookAngleH)) * cosf(lookAngleV);
+    eye.z = sqrtf(2) * sinf(lookAngleV);
+    eye *= 5.f;
+    gluLookAt(eye.x, eye.y, eye.z, // eye
+        0.0, 0.0, 0.0, // center
+        0.0, 0.0, 1.0);	// up
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -146,10 +151,10 @@ void processSpecialKeys(int key, int x, int y) {
         camSh.z -= 0.1f;
         break;
     case GLUT_KEY_LEFT:
-        camSh.y -= 0.1f;
+        camSh.x -= 0.1f;
         break;
     case GLUT_KEY_RIGHT:
-        camSh.y += 0.1f;
+        camSh.x += 0.1f;
         break;
     }
 
@@ -180,6 +185,18 @@ void processKey(unsigned char key, int x, int y)
     case 'S':
     case 's':
         saving = true;
+        break;
+    case '8':
+        lookAngleV += M_PI / 32;
+        break;
+    case '2':
+        lookAngleV -= M_PI / 32;
+        break;
+    case '4':
+        lookAngleH -= M_PI / 32;
+        break;
+    case '6':
+        lookAngleH += M_PI / 32;
         break;
     }
 
