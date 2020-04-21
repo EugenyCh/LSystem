@@ -84,20 +84,20 @@ void LSystem::interpretString(const string &str)
             state.angles.z -= state.invert * state.angle;
             break;
 
-        case '&':
-            state.angles.x += state.invert * state.angle;
-            break;
-
-        case '^':
-            state.angles.x -= state.invert * state.angle;
-            break;
-
         case '<':
             state.angles.y += state.invert * state.angle;
             break;
 
         case '>':
             state.angles.y -= state.invert * state.angle;
+            break;
+
+        case '&':
+            state.angles.x += state.invert * state.angle;
+            break;
+
+        case '^':
+            state.angles.x -= state.invert * state.angle;
             break;
         }
     }

@@ -290,14 +290,20 @@ int main(int argc, char* argv[])
     //lsystem.setDistScale     ( 0.75 );
 
     // Koch island
-    lsystem.setInitialString ( "F+F+F+F" );
-    lsystem.addRule          ( 'F', "F+F-F-FF+F+F-F" );
-    lsystem.setDistScale     ( 1 );
-    lsystem.setAngle         ( M_PI / 2 );
+    //lsystem.setInitialString ( "F+F+F+F" );
+    //lsystem.addRule          ( 'F', "F+F-F-FF+F+F-F" );
+    //lsystem.setDistScale     ( 1 );
+    //lsystem.setAngle         ( M_PI / 2 );
 
     //lsystem.setInitialString ( "F" );
     //lsystem.addRule          ( 'F', "F[-F]F[+F][F]" );
     //lsystem.setAngle         ( M_PI / 6 );
+
+    // 2D Hilbert curve
+    lsystem.setInitialString("A");
+    lsystem.addRule('A', "-BF+AFA+FB-");
+    lsystem.addRule('B', "+AF-BFB-FA+");
+    lsystem.setAngle(M_PI / 2);
 
     glutMainLoop();
 
