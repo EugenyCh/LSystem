@@ -1,0 +1,14 @@
+D:\Projects\Diplom\LSForm\LSForm\bin\Debug\LSForm.exe.config
+D:\Projects\Diplom\LSForm\LSForm\bin\Debug\LSForm.exe
+D:\Projects\Diplom\LSForm\LSForm\bin\Debug\LSForm.pdb
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\LSForm.csprojAssemblyReference.cache
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\MainWindow.g.cs
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\App.g.cs
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\LSForm_MarkupCompile.cache
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\LSForm_MarkupCompile.lref
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\MainWindow.baml
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\LSForm.g.resources
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\LSForm.Properties.Resources.resources
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\LSForm.csproj.GenerateResource.cache
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\LSForm.exe
+D:\Projects\Diplom\LSForm\LSForm\obj\Debug\LSForm.pdb
