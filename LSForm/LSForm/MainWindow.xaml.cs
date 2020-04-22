@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace LSForm
 {
@@ -25,37 +27,15 @@ namespace LSForm
         {
             InitializeComponent();
 
-            var TopMenuItems = new ObservableCollection<MenuItem>
-            {
-                new MenuItem
-                {
-                    Header = "File",
-                    Items = {
-                        new MenuItem
-                        {
-                            Header = "New"
-                        },
-                        new MenuItem
-                        {
-                            Header = "Open"
-                        },
-                        new MenuItem
-                        {
-                            Header = "Save"
-                        }
-                    }
-                },
-                new MenuItem
-                {
-                    Header = "Edit"
-                },
-                new MenuItem
-                {
-                    Header = "Search"
-                }
-            };
+        }
 
-            ReadyTemplates.ItemsSource = TopMenuItems;
+        private void InitBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string input = (sender as TextBox).Text;
+            if (!Regex.IsMatch(input, @"^\d+$") && input.Length > 0)
+                InitBox.Background = new SolidColorBrush(Colors.Pink);
+            else
+                InitBox.Background = new SolidColorBrush(Colors.White);
         }
     }
 }

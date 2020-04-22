@@ -5,15 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LSForm"
         mc:Ignorable="d"
-        Title="Генератор L-систем" Height="480" Width="660">
+        Title="Генератор L-систем" Height="320" Width="480">
     <Grid>
-        <Menu VerticalAlignment="Top">
-            <MenuItem Header="Файл">
-                <MenuItem Header="Импорт шаблона"/>
-                <MenuItem Header="Экспорт шаблона"/>
-                <MenuItem Header="Готовые шаблоны" Name="ReadyTemplates"/>
-                <MenuItem Header="Пользовательские шаблоны"/>
-            </MenuItem>
-        </Menu>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" VerticalAlignment="Top">
+                <MenuItem Header="Файл">
+                    <MenuItem Header="Импорт шаблона"/>
+                    <MenuItem Header="Экспорт шаблона"/>
+                    <MenuItem Header="Готовые шаблоны" Name="ReadyTemplates"/>
+                    <MenuItem Header="Пользовательские шаблоны" Name="UserTemplates"/>
+                </MenuItem>
+            </Menu>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="24"></RowDefinition>
+                            <RowDefinition Height="24"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="Инициализирующая строка:"></Label>
+                        <TextBox Grid.Row="1" Name="InitBox" TextChanged="InitBox_TextChanged"></TextBox>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>
