@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,9 +26,13 @@ namespace LSForm
     {
         public MainWindow()
         {
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             InitializeComponent();
-
         }
+
+        public float Width0 { get; set; }
+        public float Width1 { get; set; }
+        public int Iters { get; set; }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -56,7 +61,55 @@ namespace LSForm
         private void ButtonRemove_Click(object sender, RoutedEventArgs e)
         {
             if (StackRules.Children.Count > 2)
-                StackRules.Children.Remove((Grid)(((Button)sender).Parent));
+                StackRules.Children.Remove((sender as Button).Parent as Grid);
+        }
+
+        private void BoxIter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                string input = BoxIter.Text;
+                Iters = int.Parse(input);
+                if (Iters < 0)
+                    throw new Exception();
+                BoxIter.Background = new SolidColorBrush(Colors.White);
+            }
+            catch
+            {
+                BoxIter.Background = new SolidColorBrush(Colors.Pink);
+            }
+        }
+
+        private void BoxWidth0_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                string input = BoxWidth0.Text;
+                Width0 = float.Parse(input);
+                if (Width0 < 0.0)
+                    throw new Exception();
+                BoxWidth0.Background = new SolidColorBrush(Colors.White);
+            }
+            catch
+            {
+                BoxWidth0.Background = new SolidColorBrush(Colors.Pink);
+            }
+        }
+
+        private void BoxWidth1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                string input = BoxWidth1.Text;
+                Width1 = float.Parse(input);
+                if (Width1 < 0.0)
+                    throw new Exception();
+                BoxWidth1.Background = new SolidColorBrush(Colors.White);
+            }
+            catch
+            {
+                BoxWidth1.Background = new SolidColorBrush(Colors.Pink);
+            }
         }
     }
 }
