@@ -17,7 +17,6 @@ D:\Projects\Diplom\LSForm\LSForm\bin\Release\ro\Xceed.Wpf.AvalonDock.resources.d
 D:\Projects\Diplom\LSForm\LSForm\bin\Release\ru\Xceed.Wpf.AvalonDock.resources.dll
 D:\Projects\Diplom\LSForm\LSForm\bin\Release\sv\Xceed.Wpf.AvalonDock.resources.dll
 D:\Projects\Diplom\LSForm\LSForm\bin\Release\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
-D:\Projects\Diplom\LSForm\LSForm\obj\Release\LSForm.csprojAssemblyReference.cache
 D:\Projects\Diplom\LSForm\LSForm\obj\Release\MainWindow.g.cs
 D:\Projects\Diplom\LSForm\LSForm\obj\Release\App.g.cs
 D:\Projects\Diplom\LSForm\LSForm\obj\Release\LSForm_MarkupCompile.cache
