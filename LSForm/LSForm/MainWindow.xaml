@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extra="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:LSForm"
         mc:Ignorable="d"
-        Title="Генератор L-систем" Height="320" Width="480">
+        Title="Генератор L-систем" Height="320" Width="640">
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Top" VerticalAlignment="Top">
@@ -70,15 +71,50 @@
                 <Grid Grid.Column="1" Margin="8">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="24"></RowDefinition>
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0" HorizontalAlignment="Center">
+                    <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="24"></ColumnDefinition>
+                            <ColumnDefinition Width="64"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="Стартовая итерация:" Margin="0 0 8 0" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Grid.Column="0" Text="Стартовая итерация:" Margin="0 0 8 0"></TextBlock>
                         <TextBox Grid.Column="1" Text="3" Name="IterBox"></TextBox>
                     </Grid>
+                    <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0 8 0 0">
+                        <Grid Margin="0 0 0 8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="64"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Цвет нулевой вложенности:"></TextBlock>
+                            <extra:ColorPicker Grid.Column="1" Height="24" SelectedColor="Red"></extra:ColorPicker>
+                        </Grid>
+                        <Grid Margin="0 0 0 8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="64"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Цвет последней вложенности:"></TextBlock>
+                            <extra:ColorPicker Grid.Column="1" Height="24" SelectedColor="Lime"></extra:ColorPicker>
+                        </Grid>
+                        <Grid Margin="0 0 0 8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="64"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Толщина нулевой вложенности:"></TextBlock>
+                            <TextBox Grid.Column="1" Text="4.0" Height="24"></TextBox>
+                        </Grid>
+                        <Grid Margin="0 0 0 8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="64"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Толщина последней вложенности:"></TextBlock>
+                            <TextBox Grid.Column="1" Text="1.0" Height="24"></TextBox>
+                        </Grid>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </DockPanel>
