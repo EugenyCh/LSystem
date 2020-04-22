@@ -25,10 +25,21 @@ namespace LSForm
     /// </summary>
     public partial class MainWindow : Window
     {
+        /*
+         * Init = 0,
+         * Iters = 1,
+         * Width0 = 2,
+         * Width1 = 3
+         */
+        private bool[] mainFlags = new bool[4] { true, true, true, true };
+        private List<bool> ruleFlags = new List<bool>();
+
         public MainWindow()
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             InitializeComponent();
+            ruleFlags.Add(true);
+            ruleFlags.Add(true);
         }
 
         public float Width0 { get; set; }
@@ -66,9 +77,36 @@ namespace LSForm
                 StackRules.Children.Remove((sender as Button).Parent as Grid);
         }
 
+        private void InitBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string input = InitBox.Text;
+            if (input.Length < 1)
+            {
+                InitBox.Background = new SolidColorBrush(Colors.Pink);
+                mainFlags[0] = false;
+            }
+            else
+            {
+                InitBox.Background = new SolidColorBrush(Colors.White);
+                mainFlags[0] = true;
+            }
+        }
+
         private void BoxR_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string input = (sender as TextBox).Text;
+            TextBox box = sender as TextBox;
+            int index = StackRules.Children.IndexOf((sender as Button).Parent as Grid);
+            string input = box.Text;
+            if (input.Length != 1)
+            {
+                box.Background = new SolidColorBrush(Colors.Pink);
+                ruleFlags[index] = false;
+            }
+            else
+            {
+                box.Background = new SolidColorBrush(Colors.White);
+                ruleFlags[index] = true;
+            }
         }
 
         private void BoxIter_TextChanged(object sender, TextChangedEventArgs e)
@@ -80,10 +118,12 @@ namespace LSForm
                 if (Iters < 0)
                     throw new Exception();
                 BoxIter.Background = new SolidColorBrush(Colors.White);
+                mainFlags[1] = true;
             }
             catch
             {
                 BoxIter.Background = new SolidColorBrush(Colors.Pink);
+                mainFlags[1] = false;
             }
         }
 
@@ -96,10 +136,12 @@ namespace LSForm
                 if (Width0 < 0.0)
                     throw new Exception();
                 BoxWidth0.Background = new SolidColorBrush(Colors.White);
+                mainFlags[2] = true;
             }
             catch
             {
                 BoxWidth0.Background = new SolidColorBrush(Colors.Pink);
+                mainFlags[2] = false;
             }
         }
 
@@ -112,10 +154,12 @@ namespace LSForm
                 if (Width1 < 0.0)
                     throw new Exception();
                 BoxWidth1.Background = new SolidColorBrush(Colors.White);
+                mainFlags[3] = true;
             }
             catch
             {
                 BoxWidth1.Background = new SolidColorBrush(Colors.Pink);
+                mainFlags[3] = false;
             }
         }
 

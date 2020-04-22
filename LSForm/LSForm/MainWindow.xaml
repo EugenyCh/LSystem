@@ -33,7 +33,7 @@
                             <RowDefinition Height="24"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Content="Инициализирующая строка:"></Label>
-                        <TextBox Grid.Row="1" Name="InitBox" Text="A"></TextBox>
+                        <TextBox Grid.Row="1" Name="InitBox" Text="A" TextChanged="InitBox_TextChanged"></TextBox>
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
