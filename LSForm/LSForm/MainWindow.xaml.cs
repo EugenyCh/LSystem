@@ -45,11 +45,18 @@ namespace LSForm
             Grid.SetColumn(boxE, 1);
             Button button = new Button();
             button.Content = "-";
+            button.Click += ButtonRemove_Click;
             Grid.SetColumn(button, 2);
             grid.Children.Add(boxR);
             grid.Children.Add(boxE);
             grid.Children.Add(button);
             StackRules.Children.Insert(StackRules.Children.Count - 1, grid);
+        }
+
+        private void ButtonRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (StackRules.Children.Count > 2)
+                StackRules.Children.Remove((Grid)(((Button)sender).Parent));
         }
     }
 }
