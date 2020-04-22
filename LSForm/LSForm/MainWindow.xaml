@@ -21,7 +21,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid Margin="8">
+                <Grid Grid.Column="0" Margin="8">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -65,6 +65,19 @@
                                 <Button Margin="0 0 0 8" Content="+" Name="AddButton" Click="AddButton_Click"></Button>
                             </StackPanel>
                         </ScrollViewer>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1" Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="24"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="24"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Стартовая итерация:" Margin="0 0 8 0" HorizontalAlignment="Right"></TextBlock>
+                        <TextBox Grid.Column="1" Text="3" Name="IterBox"></TextBox>
                     </Grid>
                 </Grid>
             </Grid>
