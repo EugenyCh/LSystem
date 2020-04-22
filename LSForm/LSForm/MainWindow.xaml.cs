@@ -28,14 +28,5 @@ namespace LSForm
             InitializeComponent();
 
         }
-
-        private void InitBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string input = (sender as TextBox).Text;
-            if (!Regex.IsMatch(input, @"^\d+$") && input.Length > 0)
-                InitBox.Background = new SolidColorBrush(Colors.Pink);
-            else
-                InitBox.Background = new SolidColorBrush(Colors.White);
-        }
     }
 }
