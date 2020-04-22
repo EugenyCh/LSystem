@@ -88,7 +88,7 @@
                                 <ColumnDefinition Width="64"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Цвет нулевой вложенности:"></TextBlock>
-                            <extra:ColorPicker Grid.Column="1" Height="24" SelectedColor="Red"></extra:ColorPicker>
+                            <extra:ColorPicker Grid.Column="1" Height="24" SelectedColor="Red" Name="ColorPicker0"></extra:ColorPicker>
                         </Grid>
                         <Grid Margin="0 0 0 8">
                             <Grid.ColumnDefinitions>
@@ -96,7 +96,7 @@
                                 <ColumnDefinition Width="64"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Цвет последней вложенности:"></TextBlock>
-                            <extra:ColorPicker Grid.Column="1" Height="24" SelectedColor="Lime"></extra:ColorPicker>
+                            <extra:ColorPicker Grid.Column="1" Height="24" SelectedColor="Lime" Name="ColorPicker1"></extra:ColorPicker>
                         </Grid>
                         <Grid Margin="0 0 0 8">
                             <Grid.ColumnDefinitions>

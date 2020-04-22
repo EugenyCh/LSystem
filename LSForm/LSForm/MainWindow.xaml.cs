@@ -128,13 +128,37 @@ namespace LSForm
             writer.Write(value);
         }
 
-        private void WriteString(BinaryWriter writer, string value)
+        private void WriteFloat(BinaryWriter writer, float value)
         {
-            Console.Write($"{value.Length} bytes : ");
+            Console.Write($"{sizeof(float)} bytes : ");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(value);
             Console.ForegroundColor = ConsoleColor.White;
             writer.Write(value);
+        }
+
+        private void WriteBytes(BinaryWriter writer, byte[] value)
+        {
+            Console.Write($"{value.Length} bytes : ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("[");
+            for (int i = 0; i < value.Length; ++i)
+                if (i < value.Length - 1)
+                    Console.Write($"{value[i]}, ");
+                else
+                    Console.WriteLine($"{value[i]}]");
+            Console.ForegroundColor = ConsoleColor.White;
+            writer.Write(value);
+        }
+
+        private void WriteString(BinaryWriter writer, string value)
+        {
+            byte[] array = Encoding.ASCII.GetBytes(value);
+            Console.Write($"{array.Length} bytes : ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(value);
+            Console.ForegroundColor = ConsoleColor.White;
+            writer.Write(array);
         }
 
         private void ButtonRender_Click(object sender, RoutedEventArgs e)
@@ -145,7 +169,7 @@ namespace LSForm
                 using (BinaryWriter writer = new BinaryWriter(File.Open("input.bin", FileMode.OpenOrCreate)))
                 {
 
-                    Console.WriteLine("Generation of \"input.bin\"");
+                    Console.WriteLine("Generation of \"input.bin\"...");
                     WriteInt(writer, rulesCount);
                     WriteInt(writer, InitBox.Text.Length);
                     WriteString(writer, InitBox.Text);
@@ -158,6 +182,16 @@ namespace LSForm
                         WriteInt(writer, boxE.Text.Length);
                         WriteString(writer, boxE.Text);
                     }
+                    WriteInt(writer, Iters);
+                    Color color0 = ColorPicker0.SelectedColor.Value;
+                    Color color1 = ColorPicker1.SelectedColor.Value;
+                    byte[] colorBytes0 = new byte[4] { color0.R, color0.G, color0.B, color0.A };
+                    byte[] colorBytes1 = new byte[4] { color1.R, color1.G, color1.B, color1.A };
+                    WriteBytes(writer, colorBytes0);
+                    WriteBytes(writer, colorBytes1);
+                    WriteFloat(writer, Width0);
+                    WriteFloat(writer, Width1);
+                    Console.WriteLine($"Total {writer.BaseStream.Length} bytes.");
                 }
             }
             catch
