@@ -4,11 +4,11 @@
 exe
 C#
 .cs
-D:\Projects\Diplom\LSForm\LSForm\obj\Debug\
+D:\Projects\Diplom\LSForm\LSForm\obj\Release\
 LSForm
 none
 false
-DEBUG;TRACE
+TRACE
 D:\Projects\Diplom\LSForm\LSForm\App.xaml
 11151548125
 
