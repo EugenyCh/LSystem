@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using System.IO;
 
 namespace LSForm
 {
@@ -42,6 +43,7 @@ namespace LSForm
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(24.0) });
             grid.Margin = new Thickness(0.0, 0.0, 0.0, 8.0);
             TextBox boxR = new TextBox();
+            boxR.MaxLength = 1;
             boxR.Text = "R";
             Grid.SetColumn(boxR, 0);
             TextBox boxE = new TextBox();
@@ -62,6 +64,11 @@ namespace LSForm
         {
             if (StackRules.Children.Count > 2)
                 StackRules.Children.Remove((sender as Button).Parent as Grid);
+        }
+
+        private void BoxR_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string input = (sender as TextBox).Text;
         }
 
         private void BoxIter_TextChanged(object sender, TextChangedEventArgs e)
@@ -109,6 +116,53 @@ namespace LSForm
             catch
             {
                 BoxWidth1.Background = new SolidColorBrush(Colors.Pink);
+            }
+        }
+
+        private void WriteInt(BinaryWriter writer, int value)
+        {
+            Console.Write($"{sizeof(int)} bytes : ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(value);
+            Console.ForegroundColor = ConsoleColor.White;
+            writer.Write(value);
+        }
+
+        private void WriteString(BinaryWriter writer, string value)
+        {
+            Console.Write($"{value.Length} bytes : ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(value);
+            Console.ForegroundColor = ConsoleColor.White;
+            writer.Write(value);
+        }
+
+        private void ButtonRender_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int rulesCount = StackRules.Children.Count - 1;
+                using (BinaryWriter writer = new BinaryWriter(File.Open("input.bin", FileMode.OpenOrCreate)))
+                {
+
+                    Console.WriteLine("Generation of \"input.bin\"");
+                    WriteInt(writer, rulesCount);
+                    WriteInt(writer, InitBox.Text.Length);
+                    WriteString(writer, InitBox.Text);
+                    for (int i = 0; i < rulesCount; ++i)
+                    {
+                        var grid = StackRules.Children[i] as Grid;
+                        var boxR = grid.Children[0] as TextBox;
+                        var boxE = grid.Children[1] as TextBox;
+                        WriteString(writer, boxR.Text);
+                        WriteInt(writer, boxE.Text.Length);
+                        WriteString(writer, boxE.Text);
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при создании промежуточного файла", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
