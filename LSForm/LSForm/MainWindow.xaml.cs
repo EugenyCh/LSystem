@@ -37,9 +37,9 @@ namespace LSForm
         public MainWindow()
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            ruleFlags.Add(true);
+            ruleFlags.Add(true);
             InitializeComponent();
-            ruleFlags.Add(true);
-            ruleFlags.Add(true);
         }
 
         public float Width0 { get; set; }
@@ -56,6 +56,7 @@ namespace LSForm
             TextBox boxR = new TextBox();
             boxR.MaxLength = 1;
             boxR.Text = "R";
+            boxR.TextChanged += BoxR_TextChanged;
             Grid.SetColumn(boxR, 0);
             TextBox boxE = new TextBox();
             boxE.Margin = new Thickness(8.0, 0.0, 8.0, 0.0);
@@ -69,12 +70,17 @@ namespace LSForm
             grid.Children.Add(boxE);
             grid.Children.Add(button);
             StackRules.Children.Insert(StackRules.Children.Count - 1, grid);
+            ruleFlags.Add(true);
         }
 
         private void ButtonRemove_Click(object sender, RoutedEventArgs e)
         {
             if (StackRules.Children.Count > 2)
-                StackRules.Children.Remove((sender as Button).Parent as Grid);
+            {
+                Grid grid = (sender as Button).Parent as Grid;
+                ruleFlags.RemoveAt(StackRules.Children.IndexOf(grid));
+                StackRules.Children.Remove(grid);
+            }
         }
 
         private void InitBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -95,7 +101,7 @@ namespace LSForm
         private void BoxR_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox box = sender as TextBox;
-            int index = StackRules.Children.IndexOf((sender as Button).Parent as Grid);
+            int index = StackRules.Children.IndexOf(box.Parent as Grid);
             string input = box.Text;
             if (input.Length != 1)
             {
@@ -205,10 +211,48 @@ namespace LSForm
             writer.Write(array);
         }
 
+        private bool ValidationTest()
+        {
+            if (mainFlags[0] == false)
+            {
+                MessageBox.Show("Ошибка при заполнении инициализирующей строки: её длина равна нулю",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (mainFlags[1] == false)
+            {
+                MessageBox.Show("Ошибка при заполнении стартовой итерации: должно быть целое число 0 или выше",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (mainFlags[2] == false)
+            {
+                MessageBox.Show("Ошибка при заполнении толщины нулевой вложенности: должно быть число 0 или выше",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (mainFlags[3] == false)
+            {
+                MessageBox.Show("Ошибка при заполнении толщины последней вложенности: должно быть число 0 или выше",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            for (int i = 0; i < ruleFlags.Count; ++i)
+                if (ruleFlags[i] == false)
+                {
+                    MessageBox.Show($"Ошибка при заполнении обозначения правила #{i + 1}: должен быть один символ",
+                        "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+            return true;
+        }
+
         private void ButtonRender_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                if (!ValidationTest())
+                    return;
                 int rulesCount = StackRules.Children.Count - 1;
                 using (BinaryWriter writer = new BinaryWriter(File.Open("input.bin", FileMode.OpenOrCreate)))
                 {
