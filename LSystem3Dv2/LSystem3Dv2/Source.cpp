@@ -1,7 +1,9 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <GL/freeglut.h>
 #include <GL/freeglut_ext.h>
 #include <FreeImage.h>
 #include <stdio.h>
+#include <time.h>
 #include "LSystem.h"
 
 Vector3D rot(0, -90, 0);
@@ -202,6 +204,14 @@ void processKey(unsigned char key, int x, int y)
 
 void saveImage()
 {
+	time_t rawtime;
+	struct tm* timeinfo;
+	char buffer[80];
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	strftime(buffer, 80, "screen_%Y.%m.%d_%Hh.%Mm.%Ss.png", timeinfo);
+	puts(buffer);
+
 	size_t width = winWidth;
 	size_t height = winHeight;
 	BYTE* pixels = new BYTE[3 * width * height];
@@ -210,7 +220,7 @@ void saveImage()
 
 	// Convert to FreeImage format & save to file
 	FIBITMAP* image = FreeImage_ConvertFromRawBits(pixels, width, height, 3 * width, 24, 0x0000FF, 0xFF0000, 0x00FF00, false);
-	FreeImage_Save(FIF_PNG, image, "image.png", 0);
+	FreeImage_Save(FIF_PNG, image, buffer, 0);
 
 	// Free resources
 	FreeImage_Unload(image);
