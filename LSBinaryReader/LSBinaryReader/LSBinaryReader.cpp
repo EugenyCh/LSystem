@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿#define _USE_MATH_DEFINES
+#include <iostream>
 #include <fstream>
 #include <map>
 
@@ -19,6 +20,7 @@ int main()
 	int startIter;
 	float width0, width1;
 	unsigned char color0[4], color1[4];
+	float angle, scaling;
 	int temp;
 	char* strTemp;
 
@@ -65,6 +67,12 @@ int main()
 	// Width 1
 	in.read((char*)&width1, sizeof(float));
 
+	// Angle
+	in.read((char*)&angle, sizeof(float));
+
+	// Scaling
+	in.read((char*)&scaling, sizeof(float));
+
 	in.close();
 
 	cout << "Rules count : " << rulesCount << endl;
@@ -86,6 +94,8 @@ int main()
 		<< (int)(color1[3]) << "]" << endl;
 	cout << "Width 0 : " << width0 << endl;
 	cout << "Width 1 : " << width1 << endl;
+	cout << "Angle : " << angle << " (" << (angle * 180.0 / M_PI) << " degrees)" << endl;
+	cout << "Scaling : " << scaling << endl;
 
 	return 0;
 }
