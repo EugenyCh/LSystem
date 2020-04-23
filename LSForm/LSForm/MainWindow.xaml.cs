@@ -331,6 +331,8 @@ namespace LSForm
                     WriteBytes(writer, colorBytes1);
                     WriteFloat(writer, Width0);
                     WriteFloat(writer, Width1);
+                    WriteFloat(writer, (float)(Angle * Math.PI / 180.0));
+                    WriteFloat(writer, Scaling);
                     Console.WriteLine($"Total {writer.BaseStream.Length} bytes.");
                 }
             }
