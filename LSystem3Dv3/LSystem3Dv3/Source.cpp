@@ -232,6 +232,7 @@ int main(int argc, char* argv[])
 	map<char, string> rules;
 	float width0, width1;
 	unsigned char color0[4], color1[4];
+	float angle, scaling;
 	int temp;
 	char* strTemp;
 
@@ -264,6 +265,8 @@ int main(int argc, char* argv[])
 	in.read((char*)&color1, 4); // Color 1
 	in.read((char*)&width0, sizeof(float)); // Width 0
 	in.read((char*)&width1, sizeof(float)); // Width 1
+	in.read((char*)&angle, sizeof(float)); // Angle
+	in.read((char*)&scaling, sizeof(float)); // Scaling
 	in.close();
 
     // initialize glut
@@ -286,12 +289,13 @@ int main(int argc, char* argv[])
     init();
 
     // initialize L-system
-    lsystem.width0 = width0;
-    lsystem.width1 = width1;
+    //lsystem.width0 = width0;
+    //lsystem.width1 = width1;
     lsystem.setInitialString(initString.c_str());
     for (auto r : rules)
         lsystem.addRule(r.first, r.second.c_str());
-    lsystem.setDistScale(0.75);
+    lsystem.setAngle(angle);
+    lsystem.setDistScale(scaling);
 
     glutMainLoop();
 
