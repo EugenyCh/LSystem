@@ -2,26 +2,6 @@
 #include <fstream>
 #include <map>
 
-#define RESET   "\033[0m"
-#define BLACK   "\033[30m"      /* Black */
-#define RED     "\033[31m"      /* Red */
-#define GREEN   "\033[32m"      /* Green */
-#define YELLOW  "\033[33m"      /* Yellow */
-#define BLUE    "\033[34m"      /* Blue */
-#define MAGENTA "\033[35m"      /* Magenta */
-#define CYAN    "\033[36m"      /* Cyan */
-#define WHITE   "\033[37m"      /* White */
-#define BOLDBLACK   "\033[1m\033[30m"      /* Bold Black */
-#define BOLDRED     "\033[1m\033[31m"      /* Bold Red */
-#define BOLDGREEN   "\033[1m\033[32m"      /* Bold Green */
-#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
-#define BOLDBLUE    "\033[1m\033[34m"      /* Bold Blue */
-#define BOLDMAGENTA "\033[1m\033[35m"      /* Bold Magenta */
-#define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
-#define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
-
-#define COLORED(v) BOLDGREEN << v << RESET
-
 using namespace std;
 
 int main()
@@ -86,25 +66,26 @@ int main()
 	in.read((char*)&width1, sizeof(float));
 
 	in.close();
-	cout << "Rules count : " << COLORED(rulesCount) << endl;
-	cout << "Init string (" << COLORED(initString.length()) << " bytes) : " << COLORED(initString) << endl;
+
+	cout << "Rules count : " << rulesCount << endl;
+	cout << "Init string (" << initString.length() << " bytes) : " << initString << endl;
 	for (auto r : rules)
 	{
-		cout << "Rule '" << COLORED(r.first) << "' (" << COLORED(r.second.length()) << " bytes) : " << COLORED(r.second) << endl;
+		cout << "Rule '" << r.first << "' (" << r.second.length() << " bytes) : " << r.second << endl;
 	}
-	cout << "Start iteration : " << COLORED(startIter) << endl;
-	cout << "Color 0 : " << COLORED("[")
-		<< COLORED((int)(color0[0])) << COLORED(", ")
-		<< COLORED((int)(color0[1])) << COLORED(", ")
-		<< COLORED((int)(color0[2])) << COLORED(", ")
-		<< COLORED((int)(color0[3])) << COLORED("]") << endl;
-	cout << "Color 1 : " << COLORED("[")
-		<< COLORED((int)(color1[0])) << COLORED(", ")
-		<< COLORED((int)(color1[1])) << COLORED(", ")
-		<< COLORED((int)(color1[2])) << COLORED(", ")
-		<< COLORED((int)(color1[3])) << COLORED("]") << endl;
-	cout << "Width 0 : " << COLORED(width0) << endl;
-	cout << "Width 1 : " << COLORED(width1) << endl;
+	cout << "Start iteration : " << startIter << endl;
+	cout << "Color 0 : ["
+		<< (int)(color0[0]) << ", "
+		<< (int)(color0[1]) << ", "
+		<< (int)(color0[2]) << ", "
+		<< (int)(color0[3]) << "]" << endl;
+	cout << "Color 1 : ["
+		<< (int)(color1[0]) << ", "
+		<< (int)(color1[1]) << ", "
+		<< (int)(color1[2]) << ", "
+		<< (int)(color1[3]) << "]" << endl;
+	cout << "Width 0 : " << width0 << endl;
+	cout << "Width 1 : " << width1 << endl;
 
 	return 0;
 }
