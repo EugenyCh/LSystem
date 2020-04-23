@@ -41,8 +41,7 @@ void display()
 
     glRotatef(rot.x, 1, 0, 0);
     glRotatef(rot.y + camRotV, 0, 1, 0);
-    glRotatef(rot.z, 0, 0, 1);
-    glRotatef(camRotH, 1, 0, 1);
+    glRotatef(rot.z + camRotH, 0, 0, 1);
     glScalef(zoom, zoom, zoom);
 
     if (systemList == 0) // no display list yet, build it )
