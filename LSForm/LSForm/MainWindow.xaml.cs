@@ -33,12 +33,14 @@ namespace LSForm
          */
         private bool[] mainFlags = new bool[4] { true, true, true, true };
         private List<bool> ruleFlags = new List<bool>();
+        private ConsoleColor defaultFore;
 
         public MainWindow()
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
             ruleFlags.Add(true);
             ruleFlags.Add(true);
+            defaultFore = Console.ForegroundColor;
             InitializeComponent();
         }
 
@@ -174,7 +176,7 @@ namespace LSForm
             Console.Write($"{sizeof(int)} bytes : ");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(value);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = defaultFore;
             writer.Write(value);
         }
 
@@ -183,7 +185,7 @@ namespace LSForm
             Console.Write($"{sizeof(float)} bytes : ");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(value);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = defaultFore;
             writer.Write(value);
         }
 
@@ -197,7 +199,7 @@ namespace LSForm
                     Console.Write($"{value[i]}, ");
                 else
                     Console.WriteLine($"{value[i]}]");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = defaultFore;
             writer.Write(value);
         }
 
@@ -207,7 +209,7 @@ namespace LSForm
             Console.Write($"{array.Length} bytes : ");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(value);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = defaultFore;
             writer.Write(array);
         }
 
@@ -254,7 +256,7 @@ namespace LSForm
                 if (!ValidationTest())
                     return;
                 int rulesCount = StackRules.Children.Count - 1;
-                using (BinaryWriter writer = new BinaryWriter(File.Open("input.bin", FileMode.OpenOrCreate)))
+                using (BinaryWriter writer = new BinaryWriter(File.Open("input.bin", FileMode.Create)))
                 {
 
                     Console.WriteLine("Generation of \"input.bin\"...");

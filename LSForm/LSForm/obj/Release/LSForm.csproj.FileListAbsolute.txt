@@ -28,3 +28,4 @@ D:\Projects\Diplom\LSForm\LSForm\obj\Release\LSForm.csproj.GenerateResource.cach
 D:\Projects\Diplom\LSForm\LSForm\obj\Release\LSForm.csproj.CopyComplete
 D:\Projects\Diplom\LSForm\LSForm\obj\Release\LSForm.exe
 D:\Projects\Diplom\LSForm\LSForm\obj\Release\LSForm.pdb
+D:\Projects\Diplom\LSForm\LSForm\obj\Release\LSForm.csprojAssemblyReference.cache
