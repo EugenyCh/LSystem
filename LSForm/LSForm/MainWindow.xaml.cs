@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using System.IO;
+using System.Diagnostics;
 
 namespace LSForm
 {
@@ -339,6 +340,25 @@ namespace LSForm
             catch
             {
                 MessageBox.Show("Ошибка при создании промежуточного файла", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            try
+            {
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "LSViewer.exe",
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+
+                process.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }
