@@ -32,8 +32,28 @@ int main()
 	initString = strTemp;
 	delete[] strTemp;
 
+	for (int i = 0; i < rulesCount; ++i)
+	{
+		// Rule letter
+		char ruleName;
+		in.read((char*)&ruleName, 1);
+		// Rule string length
+		in.read((char*)&temp, sizeof(int));
+		// Relu definition
+		strTemp = new char[temp + 1];
+		in.read((char*)strTemp, temp);
+		strTemp[temp] = 0;
+		rules[ruleName] = strTemp;
+		delete[] strTemp;
+	}
+
+	in.close();
 	cout << "Rules count : " << rulesCount << endl;
 	cout << "Init string (" << temp << " bytes) : " << initString << endl;
+	for (auto r : rules)
+	{
+		cout << "Rule '" << r.first << "' (" << r.second.length() << ") : " << r.second << endl;
+	}
 
 	return 0;
 }
