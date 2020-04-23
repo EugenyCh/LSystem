@@ -1,20 +1,39 @@
-﻿// LSBinaryReader.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <iostream>
+#include <fstream>
+#include <map>
 
-#include <iostream>
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	ifstream in("input.bin", ios::binary);
+	if (!in)
+	{
+		cout << "Error of opening \"input.bin\"" << endl;
+		return 1;
+	}
+
+	string initString;
+	int rulesCount;
+	map<char, string> rules;
+	int temp;
+	char* strTemp;
+
+	// Rules count
+	in.read((char*)&rulesCount, sizeof(int));
+
+	// Init string length
+	in.read((char*)&temp, sizeof(int));
+
+	// Init string
+	strTemp = new char[temp + 1];
+	in.read((char*)strTemp, temp);
+	strTemp[temp] = 0;
+	initString = strTemp;
+	delete[] strTemp;
+
+	cout << "Rules count : " << rulesCount << endl;
+	cout << "Init string (" << temp << " bytes) : " << initString << endl;
+
+	return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
