@@ -114,6 +114,22 @@
                             <TextBlock Grid.Column="0" Text="Толщина последней вложенности:"></TextBlock>
                             <TextBox Grid.Column="1" Text="1.0" Height="24" Name="BoxWidth1" TextChanged="BoxWidth1_TextChanged"></TextBox>
                         </Grid>
+                        <Grid Margin="0 0 0 8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="64"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Угол поворота в градусах:"></TextBlock>
+                            <TextBox Grid.Column="1" Text="90.0" Height="24" Name="AngleBox" TextChanged="AngleBox_TextChanged"></TextBox>
+                        </Grid>
+                        <Grid Margin="0 0 0 8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="64"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Масштабирование с вложенностью:"></TextBlock>
+                            <TextBox Grid.Column="1" Text="0.75" Height="24" Name="ScaleBox" TextChanged="ScaleBox_TextChanged"></TextBox>
+                        </Grid>
                         <Button Content="Отобразить" Name="ButtonRender" Click="ButtonRender_Click"></Button>
                     </StackPanel>
                 </Grid>

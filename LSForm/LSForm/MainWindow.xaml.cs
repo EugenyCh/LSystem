@@ -29,9 +29,11 @@ namespace LSForm
          * Init = 0,
          * Iters = 1,
          * Width0 = 2,
-         * Width1 = 3
+         * Width1 = 3,
+         * Angle = 4,
+         * Scaling = 5
          */
-        private bool[] mainFlags = new bool[4] { true, true, true, true };
+        private bool[] mainFlags = new bool[6] { true, true, true, true, true, true };
         private List<bool> ruleFlags = new List<bool>();
         private ConsoleColor defaultFore;
 
@@ -47,6 +49,8 @@ namespace LSForm
         public float Width0 { get; set; }
         public float Width1 { get; set; }
         public int Iters { get; set; }
+        public float Angle { get; set; }
+        public float Scaling { get; set; }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -141,7 +145,7 @@ namespace LSForm
             {
                 string input = BoxWidth0.Text;
                 Width0 = float.Parse(input);
-                if (Width0 < 0.0)
+                if (Width0 <= 0.0)
                     throw new Exception();
                 BoxWidth0.Background = new SolidColorBrush(Colors.White);
                 mainFlags[2] = true;
@@ -159,7 +163,7 @@ namespace LSForm
             {
                 string input = BoxWidth1.Text;
                 Width1 = float.Parse(input);
-                if (Width1 < 0.0)
+                if (Width1 <= 0.0)
                     throw new Exception();
                 BoxWidth1.Background = new SolidColorBrush(Colors.White);
                 mainFlags[3] = true;
@@ -168,6 +172,40 @@ namespace LSForm
             {
                 BoxWidth1.Background = new SolidColorBrush(Colors.Pink);
                 mainFlags[3] = false;
+            }
+        }
+
+        private void AngleBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                string input = AngleBox.Text;
+                Angle = float.Parse(input);
+                AngleBox.Background = new SolidColorBrush(Colors.White);
+                mainFlags[4] = true;
+            }
+            catch
+            {
+                AngleBox.Background = new SolidColorBrush(Colors.Pink);
+                mainFlags[4] = false;
+            }
+        }
+
+        private void ScaleBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                string input = ScaleBox.Text;
+                Scaling = float.Parse(input);
+                if (Scaling <= 0.0)
+                    throw new Exception();
+                ScaleBox.Background = new SolidColorBrush(Colors.White);
+                mainFlags[5] = true;
+            }
+            catch
+            {
+                ScaleBox.Background = new SolidColorBrush(Colors.Pink);
+                mainFlags[5] = false;
             }
         }
 
@@ -229,13 +267,25 @@ namespace LSForm
             }
             if (mainFlags[2] == false)
             {
-                MessageBox.Show("Ошибка при заполнении толщины нулевой вложенности: должно быть число 0 или выше",
+                MessageBox.Show("Ошибка при заполнении толщины нулевой вложенности: должно быть число больше нуля",
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
             if (mainFlags[3] == false)
             {
-                MessageBox.Show("Ошибка при заполнении толщины последней вложенности: должно быть число 0 или выше",
+                MessageBox.Show("Ошибка при заполнении толщины последней вложенности: должно быть число больше нуля",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (mainFlags[4] == false)
+            {
+                MessageBox.Show("Ошибка при заполнении угла поворота",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (mainFlags[5] == false)
+            {
+                MessageBox.Show("Ошибка при заполнении масштабирования:  должно быть число больше нуля",
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
