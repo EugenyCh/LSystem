@@ -41,7 +41,8 @@ void display()
 
     glRotatef(rot.x, 1, 0, 0);
     glRotatef(rot.y + camRotV, 0, 1, 0);
-    glRotatef(rot.z + camRotH, 0, 0, 1);
+    glRotatef(rot.z, 0, 0, 1);
+    glRotatef(camRotH, 1, 0, 1);
     glScalef(zoom, zoom, zoom);
 
     if (systemList == 0) // no display list yet, build it )
@@ -289,8 +290,18 @@ int main(int argc, char* argv[])
     init();
 
     // initialize L-system
-    //lsystem.width0 = width0;
-    //lsystem.width1 = width1;
+    lsystem.width0 = width0;
+    lsystem.width1 = width1;
+    // Color 0
+    lsystem.color0[0] = color0[0] / 255.0f;
+    lsystem.color0[1] = color0[1] / 255.0f;
+    lsystem.color0[2] = color0[2] / 255.0f;
+    lsystem.color0[3] = color0[3] / 255.0f;
+    // Color 1
+    lsystem.color1[0] = color1[0] / 255.0f;
+    lsystem.color1[1] = color1[1] / 255.0f;
+    lsystem.color1[2] = color1[2] / 255.0f;
+    lsystem.color1[3] = color1[3] / 255.0f;
     lsystem.setInitialString(initString.c_str());
     for (auto r : rules)
         lsystem.addRule(r.first, r.second.c_str());

@@ -1,8 +1,8 @@
 ﻿  Source.cpp
-D:\Projects\Diplom\LSystem3Dv3\LSystem3Dv3\Source.cpp(210,75): warning C4267: аргумент: преобразование из "size_t" в "GLsizei"; возможна потеря данных
-D:\Projects\Diplom\LSystem3Dv3\LSystem3Dv3\Source.cpp(213,125): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\LSystem3Dv3\LSystem3Dv3\Source.cpp(211,75): warning C4267: аргумент: преобразование из "size_t" в "GLsizei"; возможна потеря данных
+D:\Projects\Diplom\LSystem3Dv3\LSystem3Dv3\Source.cpp(214,125): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
   Создание кода
-  1 of 423 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  0 of 423 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено

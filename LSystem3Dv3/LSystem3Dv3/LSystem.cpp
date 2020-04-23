@@ -140,7 +140,12 @@ void LSystem::drawLine(const Vector3D &p1, const Vector3D &p2, float k) const
     // k in [0; 1]
     glLineWidth((width1 - width0) * k + width0);
     glBegin(GL_LINES);
-    glColor3f(1.f - k, k, 0.f);
+    glColor4f(
+        (color1[0] - color0[0]) * k + color0[0],
+        (color1[1] - color0[1]) * k + color0[1],
+        (color1[2] - color0[2]) * k + color0[2],
+        (color1[3] - color0[3]) * k + color0[3]
+    );
     glVertex3fv(p1);
     glVertex3fv(p2);
     glEnd();
