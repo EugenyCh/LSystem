@@ -79,8 +79,12 @@ protected:
     string oneStep(const string &in) const;
     Vector3D step(const State &state) const
     {
-        return Matrix3D::rotateZ(state.angles.z) * Matrix3D::rotateY(state.angles.y) *
-               Matrix3D::rotateX(state.angles.x) * state.dir;
+        auto res = Matrix3D::rotateZ(state.angles.z) * Matrix3D::rotateY(state.angles.y) *
+            Matrix3D::rotateX(state.angles.x) * state.dir;
+        printf("(%.1f, %.1f, %.1f) -> (%.1f, %.1f, %.1f)\n",
+            state.dir.x, state.dir.y, state.dir.z,
+            res.x, res.y, res.z);
+        return res;
     }
 
     virtual void drawLine(const Vector3D &p1, const Vector3D &p2, float k) const;

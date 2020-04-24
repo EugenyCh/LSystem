@@ -85,7 +85,7 @@ void LSystem::interpretString(const string& str)
 			break;
 
 		case '|':
-			state.angles.z += state.invert * M_PI / 2;
+			state.angles.z += M_PI;
 			break;
 
 		case '<':
@@ -143,13 +143,18 @@ string LSystem::oneStep(const string& in) const
 
 void LSystem::drawLine(const Vector3D& p1, const Vector3D& p2, float k) const
 {
+	static bool first = true;
 	// k in [0; 1]
 	glLineWidth(4.f - 3.f * k);
 	glBegin(GL_LINES);
-	glColor3f(1.f - k, k, 0.f);
+	if (first)
+		glColor3f(1.f, 0.f, 0.f);
+	else
+		glColor3f(1.f - k, k, 0.f);
 	glVertex3fv(p1);
 	glVertex3fv(p2);
 	glEnd();
+	first = false;
 }
 
 void LSystem::updateState(State& state, const Vector3D& dir, float k) const
