@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include <GL/freeglut.h>
 #include <GL/freeglut_ext.h>
 #include <FreeImage.h>
@@ -292,7 +292,7 @@ int main(int argc, char* argv[])
 
 	lsystem.setInitialString("AB");
 	lsystem.addRule('A', "[F[+FA][-FA]]");
-	lsystem.addRule('B', " [F[>FB][<FB]]");
+	lsystem.addRule('B', "[F[>FB][<FB]]");
 	lsystem.setDistScale(0.75);
 
 	//lsystem.setInitialString ( "X" );

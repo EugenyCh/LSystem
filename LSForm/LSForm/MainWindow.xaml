@@ -33,7 +33,7 @@
                             <RowDefinition Height="24"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Content="Инициализирующая строка:"></Label>
-                        <TextBox Grid.Row="1" Name="InitBox" Text="A" TextChanged="InitBox_TextChanged"></TextBox>
+                        <TextBox Grid.Row="1" Name="InitBox" Text="AB" TextChanged="InitBox_TextChanged"></TextBox>
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
@@ -50,7 +50,7 @@
                                         <ColumnDefinition Width="24"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <TextBox Grid.Column="0" Text="A" MaxLength="1" TextChanged="BoxR_TextChanged"></TextBox>
-                                    <TextBox Grid.Column="1" Text="-BF+AFA+FB-" Margin="8 0 8 0"></TextBox>
+                                    <TextBox Grid.Column="1" Text="[F[+FA][-FA]]" Margin="8 0 8 0"></TextBox>
                                     <Button Grid.Column="2" Content="-" Click="ButtonRemove_Click"></Button>
                                 </Grid>
                                 <Grid Margin="0 0 0 8">
@@ -60,7 +60,7 @@
                                         <ColumnDefinition Width="24"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <TextBox Grid.Column="0" Text="B" MaxLength="1" TextChanged="BoxR_TextChanged"></TextBox>
-                                    <TextBox Grid.Column="1" Text="+AF-BFB-FA+" Margin="8 0 8 0"></TextBox>
+                                    <TextBox Grid.Column="1" Text="[F[&gt;FB][&lt;FB]]" Margin="8 0 8 0"></TextBox>
                                     <Button Grid.Column="2" Content="-" Click="ButtonRemove_Click"></Button>
                                 </Grid>
                                 <Button Margin="0 0 0 8" Content="+" Name="AddButton" Click="AddButton_Click"></Button>
@@ -104,7 +104,7 @@
                                 <ColumnDefinition Width="64"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Толщина нулевой вложенности:"></TextBlock>
-                            <TextBox Grid.Column="1" Text="4.0" Height="24" Name="BoxWidth0" TextChanged="BoxWidth0_TextChanged"></TextBox>
+                            <TextBox Grid.Column="1" Text="5.0" Height="24" Name="BoxWidth0" TextChanged="BoxWidth0_TextChanged"></TextBox>
                         </Grid>
                         <Grid Margin="0 0 0 8">
                             <Grid.ColumnDefinitions>
@@ -120,7 +120,7 @@
                                 <ColumnDefinition Width="64"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Угол поворота в градусах:"></TextBlock>
-                            <TextBox Grid.Column="1" Text="90.0" Height="24" Name="AngleBox" TextChanged="AngleBox_TextChanged"></TextBox>
+                            <TextBox Grid.Column="1" Text="30.0" Height="24" Name="AngleBox" TextChanged="AngleBox_TextChanged"></TextBox>
                         </Grid>
                         <Grid Margin="0 0 0 8">
                             <Grid.ColumnDefinitions>
