@@ -157,9 +157,9 @@ void LSystem::drawLine(const Vector3D& p1, const Vector3D& p2, float k) const
 	first = false;
 }
 
-void LSystem::updateState(State& state, const Vector3D& dir, float k) const
+void LSystem::updateState(State& state, const Vector3D& dir, float k)
 {
 	state.pos += dir;
-	state.dir *= distScale;
+	state.dir = dir * distScale;
 	state.angle *= angleScale;
 }
