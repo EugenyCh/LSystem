@@ -1,7 +1,9 @@
-﻿  LSystem.cpp
+﻿  Source.cpp
+D:\Projects\Diplom\LSystem3Dv2\LSystem3Dv2\Source.cpp(221,72): warning C4267: аргумент: преобразование из "size_t" в "GLsizei"; возможна потеря данных
+D:\Projects\Diplom\LSystem3Dv2\LSystem3Dv2\Source.cpp(224,122): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
   Создание кода
-  1 of 342 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+  3 of 342 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
   LSystem3Dv2.vcxproj -> D:\Projects\Diplom\LSystem3Dv2\x64\Release\LSystem3Dv2.exe

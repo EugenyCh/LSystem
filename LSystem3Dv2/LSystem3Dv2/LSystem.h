@@ -79,7 +79,7 @@ protected:
     string oneStep(const string &in) const;
     Vector3D step(State &state) const
     {
-        return Matrix3D::rotate(state.angles.z, state.angles.y, state.angles.x) * state.dir;
+        return Matrix3D::rotate(state.angles.y, state.angles.x, state.angles.z) * state.dir;
     }
 
     virtual void drawLine(const Vector3D &p1, const Vector3D &p2, float k) const;
