@@ -18,8 +18,8 @@ void LSystem::interpretString(const string& str)
 	Vector3D d;
 
 	state.pos = Vector3D(0, 0, 0);
-	state.dir = Vector3D(1, 0, 0);
 	state.angles = Vector3D(0, 0, 0);
+	state.dir = Vector3D(1, 0, 0);
 	state.angle = angle;
 	state.invert = 1;
 
@@ -89,21 +89,21 @@ void LSystem::interpretString(const string& str)
 			state.angles.z -= state.invert * state.angle;
 			break;
 
+		case '&':
+			state.angles.y += state.invert * state.angle;
+			break;
+
+		case '^':
+			state.angles.y -= state.invert * state.angle;
+			break;
+
 		case '<':
 		case '\\':
-			state.angles.y += state.invert * state.angle;
+			state.angles.x += state.invert * state.angle;
 			break;
 
 		case '>':
 		case '/':
-			state.angles.y -= state.invert * state.angle;
-			break;
-
-		case '&':
-			state.angles.x += state.invert * state.angle;
-			break;
-
-		case '^':
 			state.angles.x -= state.invert * state.angle;
 			break;
 		}
@@ -158,9 +158,9 @@ void LSystem::drawLine(const Vector3D& p1, const Vector3D& p2, float k) const
 	first = false;
 }
 
-void LSystem::updateState(State& state, const Vector3D dir)
+void LSystem::updateState(State& state, const Vector3D dir) const
 {
 	state.pos += dir;
-	state.dir = dir * distScale;
+	state.dir *= distScale;
 	state.angle *= angleScale;
 }

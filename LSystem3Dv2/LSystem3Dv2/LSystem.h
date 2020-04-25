@@ -14,9 +14,9 @@ class LSystem
 {
     struct State
     {
-        Vector3D pos;
-        Vector3D dir;
+		Vector3D pos;
         Vector3D angles;
+        Vector3D dir;
         float angle;
         float invert;
     };
@@ -26,7 +26,7 @@ class LSystem
     float angle;
     float distScale;
     float angleScale;
-    string currentString;
+	string currentString;
     BoundingBox bounds;
 
 public:
@@ -77,17 +77,11 @@ public:
 
 protected:
     string oneStep(const string &in) const;
-    Vector3D step(State &state)
+    Vector3D step(State &state) const
     {
-        auto res = Matrix3D::rotateZ(state.angles.z) * Matrix3D::rotateY(state.angles.y) *
-            Matrix3D::rotateX(state.angles.x) * state.dir;
-        state.angles = Vector3D(0, 0, 0);
-        printf("(%.1f, %.1f, %.1f) -> (%.1f, %.1f, %.1f)\n",
-            state.dir.x, state.dir.y, state.dir.z,
-            res.x, res.y, res.z);
-        return res;
+        return Matrix3D::rotate(state.angles.z, state.angles.y, state.angles.x) * state.dir;
     }
 
     virtual void drawLine(const Vector3D &p1, const Vector3D &p2, float k) const;
-    virtual void updateState(State &state, const Vector3D dir);
+    virtual void updateState(State &state, const Vector3D dir) const;
 };
