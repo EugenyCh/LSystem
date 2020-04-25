@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include <GL/glut.h>
 #include "LSystem.h"
 
@@ -63,17 +64,21 @@ void LSystem::interpretString(const string& str)
 			bounds.addVertex(state.pos);
 			bounds.addVertex(state.pos + d);
 			drawLine(state.pos, state.pos + d, k);
-			updateState(state, d, k);
+			updateState(state, d);
 			break;
 
 		case 'f':
 			bounds.addVertex(state.pos);
 			bounds.addVertex(state.pos + d);
-			updateState(state, step(state), k);
+			updateState(state, step(state));
 			break;
 
 		case '!': // inverse + and - meaing (just as for & and ^ and < and >)
 			state.invert *= -1;
+			break;
+
+		case '|':
+			state.angles.z += M_PI;
 			break;
 
 		case '+':
@@ -82,10 +87,6 @@ void LSystem::interpretString(const string& str)
 
 		case '-':
 			state.angles.z -= state.invert * state.angle;
-			break;
-
-		case '|':
-			state.angles.z += M_PI;
 			break;
 
 		case '<':
@@ -157,7 +158,7 @@ void LSystem::drawLine(const Vector3D& p1, const Vector3D& p2, float k) const
 	first = false;
 }
 
-void LSystem::updateState(State& state, const Vector3D& dir, float k)
+void LSystem::updateState(State& state, const Vector3D dir)
 {
 	state.pos += dir;
 	state.dir = dir * distScale;

@@ -89,5 +89,5 @@ protected:
     }
 
     virtual void drawLine(const Vector3D &p1, const Vector3D &p2, float k) const;
-    virtual void updateState(State &state, const Vector3D &dir, float k);
+    virtual void updateState(State &state, const Vector3D dir);
 };
