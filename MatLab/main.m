@@ -51,4 +51,5 @@ xs = vst(1,:);
 ys = vst(2,:);
 zs = vst(3,:);
 plot3(xs, ys, zs)
+grid on
 rotate3d
