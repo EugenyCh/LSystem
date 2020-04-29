@@ -10,6 +10,8 @@
 
 using namespace std;
 
+static int nstep = 0;
+
 class LSystem
 {
     struct State
@@ -79,6 +81,7 @@ protected:
     string oneStep(const string &in) const;
     Vector3D step(State &state) const
     {
+        ++nstep;
         return Matrix3D::rotate(state.angles.x, state.angles.y, state.angles.z) * state.dir;
     }
 

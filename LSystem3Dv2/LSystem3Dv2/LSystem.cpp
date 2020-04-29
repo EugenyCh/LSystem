@@ -61,16 +61,17 @@ void LSystem::interpretString(const string& str)
 
 		case 'F':
 			d = step(state);
-			bounds.addVertex(state.pos);
+			//bounds.addVertex(state.pos);
 			bounds.addVertex(state.pos + d);
 			drawLine(state.pos, state.pos + d, k);
 			updateState(state, d);
 			break;
 
 		case 'f':
-			bounds.addVertex(state.pos);
+			d = step(state);
+			//bounds.addVertex(state.pos);
 			bounds.addVertex(state.pos + d);
-			updateState(state, step(state));
+			updateState(state, d);
 			break;
 
 		case '!': // inverse + and - meaing (just as for & and ^ and < and >)

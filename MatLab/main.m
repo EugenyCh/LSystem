@@ -1,7 +1,7 @@
 clear
 clc
 
-v0 = [1 0 0]';
+dir = [1 0 0]';
 
 % + -
 Ru = @(a) [
@@ -23,14 +23,17 @@ Rh = @(a) [
 
 R = @(a) Ru(a(1)) * Rl(a(2)) * Rh(a(3));
 
-vs = [v0'];
-s = '^\XF^\XFX-F^//XFX&F+//XFX-F/X-/';
+pos = [0 0 0]';
+vs = [pos'];
+%s = '^\XF^\XFX-F^//XFX&F+//XFX-F/X-/';
+s = '-+-BF+AFA+FB-F-+AF-BFB-FA+F+AF-BFB-FA+-F-BF+AFA+FB-+F+-+AF-BFB-FA+F+-BF+AFA+FB-F-BF+AFA+FB-+F+AF-BFB-FA+-F-+AF-BFB-FA+F+-BF+AFA+FB-F-BF+AFA+FB-+F+AF-BFB-FA+-+F+-BF+AFA+FB-F-+AF-BFB-FA+F+AF-BFB-FA+-F-BF+AFA+FB-+-';
 angs = [0 0 0];
 phi = 0.5 * pi;
 for ns = 1:length(s)
     switch s(ns)
         case 'F'
-            vs = [vs; (R(angs) * v0)'];
+            vs = [vs; pos + (R(angs) * dir)'];
+            pos = vs(length(vs), :);
         case '+'
             angs(1) = angs(1) + phi;
         case '-'

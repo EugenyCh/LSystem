@@ -292,10 +292,10 @@ int main(int argc, char* argv[])
 	//lsystem.addRule('A', " [+FA][-FA][>FA][<FA]");
 	//lsystem.setDistScale(0.75);
 
-	lsystem.setInitialString("AB");
-	lsystem.addRule('A', "[F[+FA][-FA]]");
-	lsystem.addRule('B', "[F[>FB][<FB]]");
-	lsystem.setDistScale(0.75);
+	//lsystem.setInitialString("AB");
+	//lsystem.addRule('A', "[F[+FA][-FA]]");
+	//lsystem.addRule('B', "[F[>FB][<FB]]");
+	//lsystem.setDistScale(0.75);
 
 	//lsystem.setInitialString ( "X" );
 	//lsystem.addRule          ( 'X',  "F[++X]-F[--X]X" );
@@ -312,12 +312,12 @@ int main(int argc, char* argv[])
 	//lsystem.setAngle         ( M_PI / 6 );
 
 	// 2D Hilbert curve
-	//lsystem.setInitialString("A");
-	//lsystem.addRule('A', "-BF+AFA+FB-");
-	//lsystem.addRule('B', "+AF-BFB-FA+");
-	//lsystem.setAngle(M_PI / 2);
+	lsystem.setInitialString("A");
+	lsystem.addRule('A', "-BF+AFA+FB-");
+	lsystem.addRule('B', "+AF-BFB-FA+");
+	lsystem.setAngle(M_PI / 2);
 
-	//// 3D Hilbert curve
+	// 3D Hilbert curve
 	//lsystem.setInitialString("X");
 	//lsystem.addRule('X', "^\\XF^\\XFX-F^//XFX&F+//XFX-F/X-/");
 	//lsystem.setAngle(M_PI / 2);
