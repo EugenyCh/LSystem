@@ -279,9 +279,6 @@ int main(int argc, char* argv[])
 	//lsystem.addRule('X', "F-[[X]+X]+F[+FX]-X");
 	//lsystem.addRule('F', "FF");
 
-	//lsystem.addRule ( 'F', "F[-&<F][<++&F]||F[--&>F]" );
-	//lsystem.setDistScale     ( 0.75 );
-
 	//lsystem.addRule ( 'F', "F[&+F][F][->F][->F][&F]" );
 	//lsystem.setDistScale     ( 0.75 );
 
@@ -289,12 +286,12 @@ int main(int argc, char* argv[])
 	//lsystem.setDistScale(0.75);
 
 	//lsystem.setInitialString("A");
-	//lsystem.addRule('A', " [+FA][-FA][>FA][<FA]");
+	//lsystem.addRule('A', " [+FA][-FA][^FA][&FA]");
 	//lsystem.setDistScale(0.75);
 	
 	//lsystem.setInitialString("AB");
 	//lsystem.addRule('A', "[F[+FA][-FA]]");
-	//lsystem.addRule('B', "[F[>FB][<FB]]");
+	//lsystem.addRule('B', "[F[^FB][&FB]]");
 	//lsystem.setDistScale(0.75);
 
 	//lsystem.setInitialString ( "X" );
@@ -321,6 +318,8 @@ int main(int argc, char* argv[])
 	lsystem.setInitialString("X");
 	lsystem.addRule('X', "^\\XF^\\XFX-F^//XFX&F+//XFX-F/X-/");
 	lsystem.setAngle(M_PI / 2);
+
+	//lsystem.setAngle(30 * M_PI / 180);
 
 	glutMainLoop();
 

@@ -40,6 +40,7 @@ void LSystem::interpretString(const string& str)
 			maxLevel = level;
 	}
 
+	bounds.addVertex(state.pos);
 	for (int i = 0; i < str.length(); i++)
 	{
 		float k;

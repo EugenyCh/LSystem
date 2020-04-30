@@ -6,6 +6,7 @@
 #include <time.h>
 #include <fstream>
 #include "LSystem.h"
+#define MAX(a, b) ((a) < (b) ? (b) : (a))
 
 Vector3D rot(0, -90, 0);
 float camRotH, camRotV;
@@ -23,9 +24,11 @@ bool saving = false;
 
 void init()
 {
-    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
+	glDepthFunc(GL_LEQUAL);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 
     glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -56,11 +59,12 @@ void display()
         glEndList();
     }
 
-    Vector3D center = -lsystem.getBounds().getCenter();
-    Vector3D size = lsystem.getBounds().getSize();
+	Vector3D center = -lsystem.getBounds().getCenter();
+	Vector3D size = lsystem.getBounds().getSize();
 
-    glScalef(4 / size.x, 4 / size.y, 1);
-    glTranslatef(center.x, center.y, center.z);
+	float sizeMax = MAX(MAX(size.x, size.y), size.z);
+	glScalef(4 / sizeMax, 4 / sizeMax, 4 / sizeMax);
+	glTranslatef(center.x, center.y, center.z);
 
     glCallList(systemList);
 
@@ -283,7 +287,7 @@ int main(int argc, char* argv[])
     // initialize glut
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(500, 500);
+	glutInitWindowSize(500, 500);
 
     // create window
     glutCreateWindow("L-system demo");

@@ -60,11 +60,21 @@ public:
     friend Matrix3D operator*(const Matrix3D&, float);
     friend Matrix3D operator*(float, const Matrix3D&);
     friend Vector3D operator*(const Matrix3D&, const Vector3D&);
+    friend Vector3D operator*(const Vector3D&, const Matrix3D&);
 };
 
 inline Vector3D operator*(const Matrix3D& a, const Vector3D& b)
 {
-    return Vector3D(a.x[0][0] * b.x + a.x[0][1] * b.y + a.x[0][2] * b.z,
+    return Vector3D(
+        a.x[0][0] * b.x + a.x[0][1] * b.y + a.x[0][2] * b.z,
         a.x[1][0] * b.x + a.x[1][1] * b.y + a.x[1][2] * b.z,
         a.x[2][0] * b.x + a.x[2][1] * b.y + a.x[2][2] * b.z);
+}
+
+inline Vector3D operator*(const Vector3D& a, const Matrix3D& b)
+{
+    return Vector3D(
+        a.x * b[0][0] + a.y * b[1][0] + a.z * b[2][0],
+        a.x * b[0][1] + a.y * b[1][1] + a.z * b[2][1],
+        a.x * b[0][2] + a.y * b[1][2] + a.z * b[2][2]);
 }
