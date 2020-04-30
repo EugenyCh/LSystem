@@ -10,24 +10,19 @@
 
 using namespace std;
 
-static int nstep = 0;
-
 class LSystem
 {
     struct State
     {
 		Vector3D pos;
-        Vector3D angles;
-        Vector3D dir;
-        float angle;
-        float invert;
+		Vector3D hlu[3];
+        float distScale;
     };
 
     map<char, string> rules;
-    string initialString;
-    float angle;
-    float distScale;
-    float angleScale;
+	string initialString;
+	float distScale;
+	float angle;
 	string currentString;
     BoundingBox bounds;
 
@@ -59,11 +54,6 @@ public:
         distScale = newScale;
     }
 
-    void setAngleScale(float scale)
-    {
-        angleScale = scale;
-    }
-
     void interpretString(const string &str);
     void buildSystem(int numIterations);
 
@@ -79,12 +69,5 @@ public:
 
 protected:
     string oneStep(const string &in) const;
-    Vector3D step(State &state) const
-    {
-        ++nstep;
-        return Matrix3D::rotate(state.angles.x, state.angles.y, state.angles.z) * state.dir;
-    }
-
     virtual void drawLine(const Vector3D &p1, const Vector3D &p2, float k) const;
-    virtual void updateState(State &state, const Vector3D dir) const;
 };

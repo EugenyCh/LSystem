@@ -6,22 +6,21 @@
 LSystem::LSystem()
 {
 	initialString = "F";
-	angle = 30 * M_PI / 180;
-	distScale = 1;
-	angleScale = 1;
+	angle = M_PI / 2;
+	distScale = 1.0;
 }
 
 void LSystem::interpretString(const string& str)
 {
 	State state;
 	stack<State> st;
-	Vector3D d;
+	Vector3D pos0;
 
 	state.pos = Vector3D(0, 0, 0);
-	state.angles = Vector3D(0, 0, 0);
-	state.dir = Vector3D(1, 0, 0);
-	state.angle = angle;
-	state.invert = 1;
+	state.hlu[0] = Vector3D(1, 0, 0);
+	state.hlu[1] = Vector3D(0, 1, 0);
+	state.hlu[2] = Vector3D(0, 0, 1);
+	state.distScale = 1.0;
 
 	int maxLevel = 0;
 	int level = 0;
@@ -48,10 +47,12 @@ void LSystem::interpretString(const string& str)
 			k = 1.0f * st.size() / maxLevel;
 		else
 			k = 1.0f;
+
 		switch (str[i])
 		{
 		case '[': // push state
 			st.push(state);
+			state.distScale *= distScale;
 			break;
 
 		case ']': // pop state
@@ -60,52 +61,62 @@ void LSystem::interpretString(const string& str)
 			break;
 
 		case 'F':
-			d = step(state);
-			//bounds.addVertex(state.pos);
-			bounds.addVertex(state.pos + d);
-			drawLine(state.pos, state.pos + d, k);
-			updateState(state, d);
+			pos0 = state.pos;
+			state.pos.x += state.distScale * state.hlu[0].x;
+			state.pos.y += state.distScale * state.hlu[1].x;
+			state.pos.z += state.distScale * state.hlu[2].x;
+			bounds.addVertex(state.pos);
+			drawLine(pos0, state.pos, k);
 			break;
 
 		case 'f':
-			d = step(state);
-			//bounds.addVertex(state.pos);
-			bounds.addVertex(state.pos + d);
-			updateState(state, d);
-			break;
-
-		case '!': // inverse + and - meaing (just as for & and ^ and < and >)
-			state.invert *= -1;
-			break;
-
-		case '|':
-			state.angles.z += M_PI;
+			state.pos.x += state.distScale * state.hlu[0].x;
+			state.pos.y += state.distScale * state.hlu[1].x;
+			state.pos.z += state.distScale * state.hlu[2].x;
 			break;
 
 		case '+':
-			state.angles.z += state.invert * state.angle;
+			state.hlu[0] = state.hlu[0] * Matrix3D::rotateZ(angle);
+			state.hlu[1] = state.hlu[1] * Matrix3D::rotateZ(angle);
+			state.hlu[2] = state.hlu[2] * Matrix3D::rotateZ(angle);
 			break;
 
 		case '-':
-			state.angles.z -= state.invert * state.angle;
+			state.hlu[0] = state.hlu[0] * Matrix3D::rotateZ(-angle);
+			state.hlu[1] = state.hlu[1] * Matrix3D::rotateZ(-angle);
+			state.hlu[2] = state.hlu[2] * Matrix3D::rotateZ(-angle);
 			break;
 
 		case '&':
-			state.angles.y += state.invert * state.angle;
+			state.hlu[0] = state.hlu[0] * Matrix3D::rotateY(angle);
+			state.hlu[1] = state.hlu[1] * Matrix3D::rotateY(angle);
+			state.hlu[2] = state.hlu[2] * Matrix3D::rotateY(angle);
 			break;
 
 		case '^':
-			state.angles.y -= state.invert * state.angle;
+			state.hlu[0] = state.hlu[0] * Matrix3D::rotateY(-angle);
+			state.hlu[1] = state.hlu[1] * Matrix3D::rotateY(-angle);
+			state.hlu[2] = state.hlu[2] * Matrix3D::rotateY(-angle);
 			break;
 
 		case '<':
 		case '\\':
-			state.angles.x += state.invert * state.angle;
+			state.hlu[0] = state.hlu[0] * Matrix3D::rotateX(angle);
+			state.hlu[1] = state.hlu[1] * Matrix3D::rotateX(angle);
+			state.hlu[2] = state.hlu[2] * Matrix3D::rotateX(angle);
 			break;
 
 		case '>':
 		case '/':
-			state.angles.x -= state.invert * state.angle;
+			state.hlu[0] = state.hlu[0] * Matrix3D::rotateX(-angle);
+			state.hlu[1] = state.hlu[1] * Matrix3D::rotateX(-angle);
+			state.hlu[2] = state.hlu[2] * Matrix3D::rotateX(-angle);
+			break;
+
+		case '|':
+			state.hlu[0] = state.hlu[0] * Matrix3D::rotateZ(M_PI);
+			state.hlu[1] = state.hlu[1] * Matrix3D::rotateZ(M_PI);
+			state.hlu[2] = state.hlu[2] * Matrix3D::rotateZ(M_PI);
 			break;
 		}
 	}
@@ -149,19 +160,9 @@ void LSystem::drawLine(const Vector3D& p1, const Vector3D& p2, float k) const
 	// k in [0; 1]
 	glLineWidth(4.f - 3.f * k);
 	glBegin(GL_LINES);
-	if (first)
-		glColor3f(1.f, 0.f, 0.f);
-	else
-		glColor3f(1.f - k, k, 0.f);
+	glColor3f(1.f - k, k, 0.f);
 	glVertex3fv(p1);
 	glVertex3fv(p2);
 	glEnd();
 	first = false;
-}
-
-void LSystem::updateState(State& state, const Vector3D dir) const
-{
-	state.pos += dir;
-	state.dir *= distScale;
-	state.angle *= angleScale;
 }
