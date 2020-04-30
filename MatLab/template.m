@@ -41,7 +41,7 @@ clear all;
 rule(1).vorher = 'F';
 rule(1).danach = 'F[-&\G][\++&G]||F[--&/G][+&G]'; 
 rule(2).vorher = 'G';
-rule(2).danach = 'F[+G][-G]F[+G][-G]FG' ;
+rule(2).danach = 'F[+G][-G]F[+G][-G]FG';
 
 n_Rules = length(rule);
 
@@ -77,11 +77,11 @@ a = a/180*pi ; % deg -> rad
 
 % THESE MATRICES MUSTN'T BE CHANGED AS WELL
 % rotation matrix R_U(a) 
-Rup = [ cos(a)   sin(a)  0; ...
+Rum = [ cos(a)   sin(a)  0; ...
         -sin(a)  cos(a)  0; ...
         0        0       1];
        
-Rum = [ cos(-a)   sin(-a)  0; ...
+Rup = [ cos(-a)   sin(-a)  0; ...
         -sin(-a)  cos(-a)  0; ...
         0         0        1];
        
@@ -151,8 +151,8 @@ for i = 1:length(axiom)
     case 'F'
         % how to plot a 'F' line
         newxT = xT + length_F*hT(1);
-        newyT = yT + length_F*hT(2);
-        newzT = zT + length_F*hT(3);
+        newyT = yT + length_F*lT(1);
+        newzT = zT + length_F*uT(1);
         line([xT newxT],[yT newyT],[zT newzT], 'color',[.5 .4 0], 'linewidth',2);
         vertsF{vNF} = [xT yT zT ; newxT newyT newzT];
         vNF = vNF +1;
@@ -162,8 +162,8 @@ for i = 1:length(axiom)
     case 'G'
         % how to plot a 'G' line
         newxT = xT + length_G*hT(1);
-        newyT = yT + length_G*hT(2);
-        newzT = zT + length_G*hT(3);
+        newyT = yT + length_G*lT(1);
+        newzT = zT + length_G*uT(1);
         line([xT newxT],[yT newyT],[zT newzT], 'color',[0 1 0], 'linewidth',2);
         vertsG{vNG} = [xT yT zT ; newxT newyT newzT];
         vNG = vNG +1;

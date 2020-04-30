@@ -10,7 +10,7 @@ hT = [1 0 0];
 lT = [0 1 0];
 uT = [0 0 1];
 a = a/180*pi ; % deg -> rad
-length_F = 1;
+length_F = 1.0;
 
 % THESE MATRICES MUSTN'T BE CHANGED AS WELL
 % rotation matrix R_U(a) 
@@ -47,6 +47,10 @@ Rbk = [ -1  0   0; ...
 
 %axiom = '^\F^\F-F^//F&F+//F-F/-/';
 axiom = '^\^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F^//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/&F+//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F/^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-/F^\^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F^//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/&F+//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F/^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F^//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/&F+//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F/^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-/-F^//^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F^//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/&F+//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F/^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F^//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/&F+//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F/^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-/&F+//^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F^//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/&F+//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F/^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F^//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/&F+//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F/^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-/-F/^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F^//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/&F+//^\XF^\XFX-F^//XFX&F+//XFX-F/X-/F^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-F/^\XF^\XFX-F^//XFX&F+//XFX-F/X-/-/-/';
+%axiom = '-+-BF+AFA+FB-F-+AF-BFB-FA+F+AF-BFB-FA+-F-BF+AFA+FB-+F+-+AF-BFB-FA+F+-BF+AFA+FB-F-BF+AFA+FB-+F+AF-BFB-FA+-F-+AF-BFB-FA+F+-BF+AFA+FB-F-BF+AFA+FB-+F+AF-BFB-FA+-+F+-BF+AFA+FB-F-+AF-BFB-FA+F+AF-BFB-FA+-F-BF+AFA+FB-+-';
+%axiom = '[F[+F[F[+F[F[+FA][-FA]]][-F[F[+FA][-FA]]]]][-F[F[+F[F[+FA][-FA]]][-F[F[+FA][-FA]]]]]][F[>F[F[>F[F[>FB][<FB]]][<F[F[>FB][<FB]]]]][<F[F[>F[F[>FB][<FB]]][<F[F[>FB][<FB]]]]]]';
+
+stkPtr = 1;
 
 figure(1)
 hold on
@@ -97,6 +101,25 @@ for i = 1:length(axiom)
         hT = hT * Rbk;
         lT = lT * Rbk;
         uT = uT * Rbk;
+    case '[' 
+        % save the current position and push on the stack
+        stack(stkPtr).xT = xT ;
+        stack(stkPtr).yT = yT ;
+        stack(stkPtr).zT = zT ;
+        stack(stkPtr).hT = hT ;
+        stack(stkPtr).lT = lT ;
+        stack(stkPtr).uT = uT ;
+        stkPtr = stkPtr +1 ;
+    case ']' 
+        % pop on the stack and return to the saved position 
+        stkPtr = stkPtr -1 ;
+        xT = stack(stkPtr).xT ;
+        yT = stack(stkPtr).yT ;
+        zT = stack(stkPtr).zT ;
+        hT = stack(stkPtr).hT ;
+        lT = stack(stkPtr).lT ;
+        uT = stack(stkPtr).uT ;
     end
 end
+axis equal;
 rotate3d on;
