@@ -312,16 +312,15 @@ int main(int argc, char* argv[])
 	//lsystem.setAngle         ( M_PI / 6 );
 
 	// 2D Hilbert curve
-	lsystem.setInitialString("A");
-	lsystem.addRule('A', "-BF+AFA+FB-");
-	lsystem.addRule('B', "+AF-BFB-FA+");
-	lsystem.setAngle(M_PI / 2);
+	//lsystem.setInitialString("A");
+	//lsystem.addRule('A', "-BF+AFA+FB-");
+	//lsystem.addRule('B', "+AF-BFB-FA+");
+	//lsystem.setAngle(M_PI / 2);
 
 	// 3D Hilbert curve
-	//lsystem.setInitialString("X");
-	//lsystem.addRule('X', "^\\XF^\\XFX-F^//XFX&F+//XFX-F/X-/");
-	//lsystem.setAngle(M_PI / 2);
-	//numIterations = 1;
+	lsystem.setInitialString("X");
+	lsystem.addRule('X', "^\\XF^\\XFX-F^//XFX&F+//XFX-F/X-/");
+	lsystem.setAngle(M_PI / 2);
 
 	glutMainLoop();
 
