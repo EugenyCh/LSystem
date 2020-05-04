@@ -108,7 +108,7 @@ namespace LSForm
                 item.Click += InnerItem_Click;
                 ItemInner.Items.Add(item);
             }
-            //ChooseInnerTemplate(0);
+            ChooseInnerTemplate(0);
         }
 
         private void ChooseInnerTemplate(int index)

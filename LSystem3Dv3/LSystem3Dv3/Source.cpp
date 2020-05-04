@@ -291,6 +291,7 @@ int main(int argc, char* argv[])
 
     // create window
     glutCreateWindow("L-system demo");
+    glutFullScreen();
 
     // register handlers
     glutDisplayFunc(display);
