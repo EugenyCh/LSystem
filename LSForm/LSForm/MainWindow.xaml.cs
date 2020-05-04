@@ -61,7 +61,6 @@ namespace LSForm
             defaultFore = Console.ForegroundColor;
             InitializeComponent();
 
-            var innerTemps = new ObservableCollection<MenuItem>();
             var lsystemsInner = new List<LSystem>();
             // XML Innner Reading
             XmlDocument xDoc = new XmlDocument();
@@ -93,6 +92,7 @@ namespace LSForm
                             break;
                     }
                 }
+                lsystemsInner.Add(system);
                 Console.WriteLine($"Fractal '{system.Name}'");
                 Console.WriteLine($"| Axiom = '{system.Axiom}'");
                 Console.WriteLine($"| Angle = '{system.Angle}'");
@@ -100,6 +100,20 @@ namespace LSForm
                 foreach (var rule in system.Rules)
                     Console.WriteLine($"| Rule '{rule.Name}' = '{rule.Def}'");
             }
+            for (int i = 0; i < lsystemsInner.Count; ++i)
+            {
+                var system = lsystemsInner[i];
+                var item = new MenuItem();
+                item.Header = system.Name;
+                item.Click += InnerItem_Click;
+                ItemInner.Items.Add(item);
+            }
+
+        }
+
+        private void InnerItem_Click(object sender, RoutedEventArgs e)
+        {
+            int index = ItemInner.Items.IndexOf((MenuItem)sender);
         }
 
         public float Width0 { get; set; }
