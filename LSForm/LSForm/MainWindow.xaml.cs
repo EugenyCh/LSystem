@@ -52,6 +52,7 @@ namespace LSForm
         private bool[] mainFlags = new bool[6] { true, true, true, true, true, true };
         private List<bool> ruleFlags = new List<bool>();
         private ConsoleColor defaultFore;
+        private List<LSystem> lsystemsInner = new List<LSystem>();
 
         public MainWindow()
         {
@@ -61,7 +62,6 @@ namespace LSForm
             defaultFore = Console.ForegroundColor;
             InitializeComponent();
 
-            var lsystemsInner = new List<LSystem>();
             // XML Innner Reading
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load("inner.xml");
@@ -108,12 +108,27 @@ namespace LSForm
                 item.Click += InnerItem_Click;
                 ItemInner.Items.Add(item);
             }
+            //ChooseInnerTemplate(0);
+        }
 
+        private void ChooseInnerTemplate(int index)
+        {
+            LSystem system = lsystemsInner[index];
+            InitBox.Text = system.Axiom;
+            AngleBox.Text = system.Angle.ToString();
+            ScaleBox.Text = system.LenFactor.ToString();
+            StackRules.Children.RemoveRange(0, StackRules.Children.Count - 1);
+            ruleFlags.Clear();
+            foreach (var rule in system.Rules)
+            {
+                AddRule(rule.Name, rule.Def);
+            }
         }
 
         private void InnerItem_Click(object sender, RoutedEventArgs e)
         {
             int index = ItemInner.Items.IndexOf((MenuItem)sender);
+            ChooseInnerTemplate(index);
         }
 
         public float Width0 { get; set; }
@@ -122,7 +137,7 @@ namespace LSForm
         public float Angle { get; set; }
         public float Scaling { get; set; }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void AddRule(string name, string definition)
         {
             Grid grid = new Grid();
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(24.0) });
@@ -131,12 +146,12 @@ namespace LSForm
             grid.Margin = new Thickness(0.0, 0.0, 0.0, 8.0);
             TextBox boxR = new TextBox();
             boxR.MaxLength = 1;
-            boxR.Text = "R";
+            boxR.Text = name;
             boxR.TextChanged += BoxR_TextChanged;
             Grid.SetColumn(boxR, 0);
             TextBox boxE = new TextBox();
             boxE.Margin = new Thickness(8.0, 0.0, 8.0, 0.0);
-            boxE.Text = $"Rule #{StackRules.Children.Count}";
+            boxE.Text = definition;
             Grid.SetColumn(boxE, 1);
             Button button = new Button();
             button.Content = "-";
@@ -147,6 +162,11 @@ namespace LSForm
             grid.Children.Add(button);
             StackRules.Children.Insert(StackRules.Children.Count - 1, grid);
             ruleFlags.Add(true);
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddRule("R", $"Rule #{StackRules.Children.Count}");
         }
 
         private void ButtonRemove_Click(object sender, RoutedEventArgs e)
