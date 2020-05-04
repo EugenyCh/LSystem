@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+  <fractal name="L-System Leaf">
+    <axiom>A</axiom>
+    <rule char="F">/F\</rule>
+    <rule char="A">F[+X]FB</rule>
+    <rule char="B">F[-Y]FA</rule>
+    <rule char="X">A</rule>
+    <rule char="Y">B</rule>
+    <angle>45</angle>
+    <lenfactor>1.36</lenfactor>
+  </fractal>
+  <fractal name="L-System Bushes 1">
+    <axiom>Y</axiom>
+    <rule char="X">X[-FFF][+FFF]FX</rule>
+    <rule char="Y">YFX[+Y][-Y]</rule>
+    <angle>25.7</angle>
+  </fractal>
+</templates>

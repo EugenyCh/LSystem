@@ -21,6 +21,21 @@ using System.Diagnostics;
 
 namespace LSForm
 {
+    public class Rule
+    {
+        public string Name;
+        public string Def;
+    }
+
+    public class LSystem
+    {
+        public string Name;
+        public string Axiom;
+        public float Angle;
+        public float LenFactor;
+        public List<Rule> Rules = new List<Rule>();
+    }
+
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -45,6 +60,46 @@ namespace LSForm
             ruleFlags.Add(true);
             defaultFore = Console.ForegroundColor;
             InitializeComponent();
+
+            var innerTemps = new ObservableCollection<MenuItem>();
+            var lsystemsInner = new List<LSystem>();
+            // XML Innner Reading
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load("inner.xml");
+            XmlElement xRoot = xDoc.DocumentElement;
+            foreach (XmlNode xfractal in xRoot)
+            {
+                LSystem system = new LSystem();
+                system.Name = xfractal.Attributes.GetNamedItem("name").Value;
+                system.Angle = 90.0f;
+                system.LenFactor = 1.0f;
+                foreach (XmlNode childnode in xfractal.ChildNodes)
+                {
+                    switch (childnode.Name) {
+                        case "axiom":
+                            system.Axiom = childnode.InnerText;
+                            break;
+                        case "angle":
+                            system.Angle = float.Parse(childnode.InnerText);
+                            break;
+                        case "lenfactor":
+                            system.LenFactor = float.Parse(childnode.InnerText);
+                            break;
+                        case "rule":
+                            Rule rule = new Rule();
+                            rule.Name = childnode.Attributes.GetNamedItem("char").Value;
+                            rule.Def = childnode.InnerText;
+                            system.Rules.Add(rule);
+                            break;
+                    }
+                }
+                Console.WriteLine($"Fractal '{system.Name}'");
+                Console.WriteLine($"| Axiom = '{system.Axiom}'");
+                Console.WriteLine($"| Angle = '{system.Angle}'");
+                Console.WriteLine($"| LenFactor = '{system.LenFactor}'");
+                foreach (var rule in system.Rules)
+                    Console.WriteLine($"| Rule '{rule.Name}' = '{rule.Def}'");
+            }
         }
 
         public float Width0 { get; set; }
@@ -360,6 +415,11 @@ namespace LSForm
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        private void ItemSave_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
