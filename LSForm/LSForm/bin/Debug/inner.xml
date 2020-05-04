@@ -4,7 +4,19 @@
     <axiom>X</axiom>
     <rule char="X">^\XF^\XFX-F^//XFX&amp;F+//XFX-F/X-/</rule>
   </fractal>
-  
+
+  <fractal name="3D Spring">
+    <axiom>F</axiom>
+    <rule char="F">F-^F</rule>
+    <angle>12</angle>
+  </fractal>
+
+  <fractal name="3D Vine">
+    <axiom>--F</axiom>
+    <rule char="F">/F[++F]-\F[--F]+//F</rule>
+    <angle>18</angle>
+  </fractal>
+
   <fractal name="2D Hilbert Curve">
     <axiom>X</axiom>
     <rule char="X">-YF+XFX+FY-</rule>
