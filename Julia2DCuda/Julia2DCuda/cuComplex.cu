@@ -1,18 +1,18 @@
 #include "cuComplex.h"
 
-cuComplex::cuComplex(float a, float b) : r(a), i(b) {}
+__device__ cuComplex::cuComplex(float a, float b) : r(a), i(b) {}
 
-float cuComplex::sqrMagnitude(void)
+__device__ float cuComplex::sqrMagnitude(void)
 {
 	return r * r + i * i;
 }
 
-cuComplex cuComplex::operator*(const cuComplex& a)
+__device__ cuComplex cuComplex::operator*(const cuComplex& a)
 {
 	return cuComplex{ r * a.r - i * a.i, i * a.r + r * a.i };
 }
 
-cuComplex cuComplex::operator+(const cuComplex& a)
+__device__ cuComplex cuComplex::operator+(const cuComplex& a)
 {
 	return cuComplex{ r + a.r, i + a.i };
 }

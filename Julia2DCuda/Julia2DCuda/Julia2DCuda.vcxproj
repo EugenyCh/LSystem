@@ -101,7 +101,7 @@
     <CudaCompile Include="kernel.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Julia2D.cpp" />
+    <ClCompile Include="Julia2D.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cuComplex.h" />

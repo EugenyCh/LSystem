@@ -19,7 +19,7 @@ public:
 	float cy;
 
 	Julia2D(float cx, float cy);
-	void compute(size_t width, size_t height, int iters);
+	bool compute(size_t width, size_t height, int iters);
 	void draw();
 };
 
