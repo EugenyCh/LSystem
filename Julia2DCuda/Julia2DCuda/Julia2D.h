@@ -1,11 +1,9 @@
 #pragma once
-#define MIN(a, b) ((a) < (b) ? (a) : (b))
-#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MAX(a, b) ((a) < (b) ? (b) : (a))
 
 typedef unsigned char byte;
 
 typedef struct {
-	bool exist = false;
 	byte color[3];
 } point;
 
@@ -13,6 +11,8 @@ class Julia2D
 {
 private:
 	point* points = nullptr;
+	int width = 0;
+	int height = 0;
 
 public:
 	float cx;
@@ -20,5 +20,6 @@ public:
 
 	Julia2D(float cx, float cy);
 	void compute(size_t width, size_t height, int iters);
+	void draw();
 };
 

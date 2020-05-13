@@ -14,6 +14,7 @@ float camRotH, camRotV;
 float camShH, camShV; // camera shift
 int mouseOldX = 0;
 int mouseOldY = 0;
+static Julia2D julia(-0.8, 0.156);
 unsigned systemList = 0; // display list to draw system
 float zoom = 1.0f;
 int winWidth, winHeight;
@@ -46,15 +47,19 @@ void display()
     glRotatef(rotZ + camRotH, 0, 0, 1);
     glScalef(zoom, zoom, zoom);
 
-    if (systemList == 0) // no display list yet, build it )
+    if (systemList == 0)
     {
         systemList = glGenLists(1);
 
         glNewList(systemList, GL_COMPILE);
-        // Drawing
+        julia.compute(winWidth, winHeight, 200);
+        julia.draw();
         glEndList();
     }
 
+    float sizeMax = MAX(winWidth, winHeight);
+    glScalef(6 / sizeMax, 6 / sizeMax, 6 / sizeMax);
+    glTranslatef(-winWidth / 2, -winHeight / 2, 0);
     glCallList(systemList);
 
     glPopMatrix();
@@ -63,6 +68,9 @@ void display()
 
 void reshape(int w, int h)
 {
+    if (w != winWidth || h != winHeight)
+        systemList = 0;
+
     winWidth = w;
     winHeight = h;
     glViewport(0, 0, (GLsizei)w, (GLsizei)h);
@@ -156,6 +164,10 @@ void processKey(unsigned char key, int x, int y)
 
     switch (key)
     {
+    case '=':
+        camShH = 0.0f;
+        camShV = 0.0f;
+        break;
     case '8':
         camRotV -= 2.0f;
         break;
@@ -178,11 +190,10 @@ int main(int argc, char* argv[])
     // initialize glut
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(500, 500);
+    glutInitWindowSize(960, 640);
 
     // create window
-    glutCreateWindow("L-system demo");
-    glutFullScreen();
+    glutCreateWindow("Julia2D demo");
 
     // register handlers
     glutDisplayFunc(display);
