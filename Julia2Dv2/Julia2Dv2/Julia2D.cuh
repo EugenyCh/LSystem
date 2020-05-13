@@ -3,14 +3,10 @@
 
 typedef unsigned char byte;
 
-typedef struct {
-	byte color[3];
-} point;
-
 class Julia2D
 {
 private:
-	point* points = nullptr;
+	byte* points = nullptr;
 	int width = 0;
 	int height = 0;
 

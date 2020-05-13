@@ -9,13 +9,11 @@
 
 __global__ void kernel(byte* buffer, const int width, const int height, const float cx, const float cy, const int iters)
 {
-	int x = threadIdx.x + blockIdx.x * blockDim.x;
-	if (x >= width)
-		return;
-	int y = threadIdx.y + blockIdx.y * blockDim.y;
+	int offset = threadIdx.x + blockDim.x * blockIdx.x;
+	int x = offset % width;
+	int y = offset / width;
 	if (y >= height)
 		return;
-	int offset = x + y * width;
 
 	// Compute point at this position
 	int halfWidth = width >> 1;
@@ -52,13 +50,12 @@ bool Julia2D::compute(size_t width, size_t height, int iters)
 {
 	if (points)
 		delete[] points;
-	points = new point[width * height];
 	this->width = width;
 	this->height = height;
 	int side = MAX(width, height);
 
 	const size_t sz = width * height;
-	byte* buffer = new byte[sz * 3];
+	points = new byte[sz * 3];
 	byte* dev_buffer;
 
 	if (cudaMalloc((void**)&dev_buffer, sz * 3) != cudaSuccess)
@@ -67,15 +64,22 @@ bool Julia2D::compute(size_t width, size_t height, int iters)
 		return false;
 	}
 
-	dim3 blocks((side + 31) / 32, (side + 31) / 32);
-	dim3 threads(32, 32);
-	printf("Rendering\n");
+	printf("Rendering %dx%d\n", width, height);
+	int threads = 1024;
+	int blocks = (sz + threads - 1) / threads;
 	clock_t tStart = clock();
-	kernel<<<blocks, threads>>>(dev_buffer, width, height, cx, cy, 50);
+	kernel<<<blocks, threads>>>(dev_buffer, width, height, cx, cy, 200);
 	cudaThreadSynchronize();
 	clock_t tFinish = clock();
 	double tDelta = (double)(tFinish - tStart) / CLOCKS_PER_SEC;
 	printf("It tooks %.3f seconds\n", tDelta);
+
+	printf("Moving\n");
+	if (cudaMemcpy((void*)points, dev_buffer, sz * 3, cudaMemcpyDeviceToHost) != cudaSuccess)
+	{
+		printf("Error on getting buffer of pixels from GPU\n");
+		return false;
+	}
 
 	cudaFree(dev_buffer);
 	return true;
@@ -88,11 +92,11 @@ void Julia2D::draw()
 	{
 		for (int x = 0; x < width; ++x)
 		{
-			int i = width * y + x;
+			int i = (width * y + x) * 3;
 			glColor3ub(
-				points[i].color[0],
-				points[i].color[1],
-				points[i].color[2]
+				points[i],
+				points[i + 1],
+				points[i + 2]
 			);
 			glVertex2i(x, y);
 		}
