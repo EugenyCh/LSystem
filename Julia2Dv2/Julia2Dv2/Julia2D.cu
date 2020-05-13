@@ -48,6 +48,8 @@ Julia2D::Julia2D(float cx, float cy)
 
 bool Julia2D::compute(size_t width, size_t height, int iters)
 {
+	width *= 2;
+	height *= 2;
 	if (points)
 		delete[] points;
 	this->width = width;
@@ -98,7 +100,7 @@ void Julia2D::draw()
 				points[i + 1],
 				points[i + 2]
 			);
-			glVertex2i(x, y);
+			glVertex2f(x * 0.5, y * 0.5);
 		}
 	}
 	glEnd();
