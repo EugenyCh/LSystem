@@ -1,20 +1,9 @@
-﻿  Compiling CUDA source file Julia2D.cu...
+﻿  Compiling CUDA source file kernel.cu...
   
-  D:\Projects\Diplom\Julia2Dv2\Julia2Dv2>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.24.28314\bin\HostX86\x64" -x cu  -ID:\Libs\Cpp\freeglut\include -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\Julia2D.cu.obj "D:\Projects\Diplom\Julia2Dv2\Julia2Dv2\Julia2D.cu" 
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(57): warning : variable "side" was declared but never referenced
-  
-  Julia2D.cu
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(55): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(56): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(57): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(69): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
-  D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(69): note: рекомендуется использовать "%zd" в строке форматирования
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(69): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
-  D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(69): note: рекомендуется использовать "%zd" в строке форматирования
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(71): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(73): warning C4267: аргумент: преобразование из "size_t" в "const int"; возможна потеря данных
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(74): warning C4996: 'cudaThreadSynchronize': объявлен deprecate
-  C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include\cuda_runtime_api.h(957): note:  см. объявление "cudaThreadSynchronize"
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(103): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(103): warning C4244: аргумент: преобразование "double" в "GLfloat", возможна потеря данных
+  D:\Projects\Diplom\Julia2Dv2\Julia2Dv2>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.24.28314\bin\HostX86\x64" -x cu  -ID:\Libs\Cpp\freeglut\include -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "D:\Projects\Diplom\Julia2Dv2\Julia2Dv2\kernel.cu" 
+  kernel.cu
+D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/kernel.cu(17): warning C4305: аргумент: усечение из "double" в "float"
+D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/kernel.cu(60): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
+D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/kernel.cu(62): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/kernel.cu(62): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
   Julia2Dv2.vcxproj -> D:\Projects\Diplom\Julia2Dv2\x64\Debug\Julia2Dv2.exe

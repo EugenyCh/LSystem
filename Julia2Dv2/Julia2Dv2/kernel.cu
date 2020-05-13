@@ -9,7 +9,7 @@
 
 float rotX = 0;
 float rotY = -90;
-float rotZ = 0;
+float rotZ = 90;
 float camRotH, camRotV;
 float camShH, camShV; // camera shift
 int mouseOldX = 0;
