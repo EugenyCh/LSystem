@@ -35,9 +35,10 @@ __global__ void kernel(byte* buffer, const int width, const int height, const fl
 	float k = (float)i / iters;
 
 	// Setting point color
-	buffer[offset * 3] = (byte)(k * 255);
-	buffer[offset * 3 + 1] = (byte)(k * 255);
-	buffer[offset * 3 + 2] = (byte)(k * 255);
+	offset *= 3;
+	buffer[offset] = (byte)(k * 255);
+	buffer[offset + 1] = (byte)(k * 255);
+	buffer[offset + 2] = (byte)(k * 255);
 }
 
 Julia2D::Julia2D(float cx, float cy)
