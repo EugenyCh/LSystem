@@ -37,7 +37,7 @@ Hypercomplex Hypercomplex::operator*(const float a)
 
 Hypercomplex Hypercomplex::operator^(const float n)
 {
-	float rn = radius() * n;
+	float rn = powf(radius(), n);
 	float ph = phi();
 	float th = theta();
 	return Hypercomplex(
