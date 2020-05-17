@@ -13,5 +13,5 @@ public:
 	float theta();
 	Hypercomplex operator+(const Hypercomplex& a);
 	Hypercomplex operator*(const float a);
-	Hypercomplex operator^(const int n);
+	Hypercomplex operator^(const float n);
 };
