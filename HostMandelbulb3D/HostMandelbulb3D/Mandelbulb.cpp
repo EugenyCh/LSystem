@@ -67,9 +67,10 @@ void Mandelbulb::compute(size_t width, size_t height)
 					points[offset] = 0;
 			}
 		}
-		printf("\r%5.1f %% | %d points",
+		printf("\r%5.1f %% | %d points (%.1f %%)",
 			100.0f * z / (side - 1),
-			pointsCount);
+			pointsCount,
+			100.f * pointsCount / sz);
 	}
 	printf("\nCeaning of points\n");
 	int cleaned = 0;
