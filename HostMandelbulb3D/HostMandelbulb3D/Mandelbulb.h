@@ -9,13 +9,11 @@ private:
 	float bailout;
 	float sqrBailout;
 	byte* points = nullptr;
-	int width = 0;
-	int height = 0;
-	int depth = 0;
+	size_t side = 0;
 
 public:
 	Mandelbulb(int power, int maxIter);
 	void compute(size_t width, size_t height);
-	void draw();
+	void draw(size_t width, size_t height);
 };
 

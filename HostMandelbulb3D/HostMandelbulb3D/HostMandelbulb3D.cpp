@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "Mandelbulb.h"
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 float rotX = 0;
 float rotY = -90;
@@ -12,7 +13,7 @@ float camRotH, camRotV;
 float camShH, camShV; // camera shift
 int mouseOldX = 0;
 int mouseOldY = 0;
-static Mandelbulb mandelbulb(8, 2);
+static Mandelbulb mandelbulb(8, 0);
 unsigned systemList = 0; // display list to draw system
 float zoom = 1.0f;
 int winWidth, winHeight;
@@ -51,13 +52,12 @@ void display()
 
         glNewList(systemList, GL_COMPILE);
         mandelbulb.compute(winWidth, winHeight);
-        mandelbulb.draw();
+        mandelbulb.draw(winWidth, winHeight);
         glEndList();
     }
 
-    float sizeMax = 1.0f * MAX(winWidth, winHeight);
-    glScalef(6 / sizeMax, 6 / sizeMax, 6 / sizeMax);
-    glTranslatef(-winWidth / 2.0f, -winHeight / 2.0f, -sizeMax / 2.0f);
+    int winSide = MIN(winWidth, winHeight);
+    glScalef(3.0f / winSide, 3.0f / winSide, 3.0f / winSide);
     glCallList(systemList);
 
     glPopMatrix();

@@ -6,6 +6,8 @@
 #include <cstdio>
 #include <ctime>
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
+#define MIN(a, b) ((a) < (b) ? (b) : (a))
+#define SIDE_MAX 480
 
 Mandelbulb::Mandelbulb(int power, int maxIter)
 {
@@ -19,30 +21,28 @@ void Mandelbulb::compute(size_t width, size_t height)
 {
 	if (points)
 		delete[] points;
-	this->width = width;
-	this->height = height;
-	this->depth = MAX(width, height);
+	side = MIN(width, height);
+	if (side > SIDE_MAX)
+		side = SIDE_MAX;
 
-	const size_t sz = width * height * depth;
-	points = new byte[sz * 4];
+	const size_t sz = side * side * side;
+	points = new byte[sz];
 
-	printf("Rendering %dx%d%d\n", width, height, depth);
+	printf("Computing %d^3 points\n", side);
 	clock_t tStart = clock();
-	int halfWidth = width >> 1;
-	int halfHeight = height >> 1;
-	int halfSide = depth >> 1;
+	int pointsCount = 0;
+	int halfSide = side >> 1;
 	// Processing
-	for (int z = 0; z < depth; ++z)
+	for (int z = 0; z < side; ++z)
 	{
-		printf("\r%5.1f %%", 100.0f * z / (depth - 1));
-		for (int y = 0; y < height; ++y)
+		for (int y = 0; y < side; ++y)
 		{
-			for (int x = 0; x < width; ++x)
+			for (int x = 0; x < side; ++x)
 			{
-				int offset = (z * width * height + y * width + x) * 4;
+				int offset = z * side * side + y * side + x;
 				// Compute point at this position
-				float fx = bailout * (float)(x - halfWidth) / halfSide;
-				float fy = bailout * (float)(y - halfHeight) / halfSide;
+				float fx = bailout * (float)(x - halfSide) / halfSide;
+				float fy = bailout * (float)(y - halfSide) / halfSide;
 				float fz = bailout * (float)(z - halfSide) / halfSide;
 				Hypercomplex hc(fx, fy, fz);
 				Hypercomplex hz(fx, fy, fz);
@@ -60,23 +60,53 @@ void Mandelbulb::compute(size_t width, size_t height)
 
 				if (belongs)
 				{
-					//float k = hz.sqrRadius() / sqrBailout;
-					float k = 1.0f;
-					// Setting point color
-					points[offset] = (byte)(k * 255);
-					points[offset + 1] = (byte)(k * 255);
-					points[offset + 2] = (byte)(k * 255);
-					points[offset + 3] = 255;
+					points[offset] = 255;
+					++pointsCount;
 				}
 				else
-				{
 					points[offset] = 0;
-					points[offset + 1] = 0;
-					points[offset + 2] = 0;
-					points[offset + 3] = 0;
+			}
+		}
+		printf("\r%5.1f %% | %d points",
+			100.0f * z / (side - 1),
+			pointsCount);
+	}
+	printf("\nCeaning of points\n");
+	int cleaned = 0;
+	for (int z = 1; z < side - 1; ++z)
+	{
+		for (int y = 1; y < side - 1; ++y)
+		{
+			for (int x = 1; x < side - 1; ++x)
+			{
+				int offset000 = (z - 1) * side * side + (y - 1) * side + (x - 1);
+				int offset001 = (z - 1) * side * side + (y - 1) * side + (x + 1);
+				int offset010 = (z - 1) * side * side + (y + 1) * side + (x - 1);
+				int offset011 = (z - 1) * side * side + (y + 1) * side + (x + 1);
+				int offset100 = (z + 1) * side * side + (y - 1) * side + (x - 1);
+				int offset101 = (z + 1) * side * side + (y - 1) * side + (x + 1);
+				int offset110 = (z + 1) * side * side + (y + 1) * side + (x - 1);
+				int offset111 = (z + 1) * side * side + (y + 1) * side + (x + 1);
+				bool h000 = points[offset000] > 0;
+				bool h001 = points[offset001] > 0;
+				bool h010 = points[offset010] > 0;
+				bool h011 = points[offset011] > 0;
+				bool h100 = points[offset100] > 0;
+				bool h101 = points[offset101] > 0;
+				bool h110 = points[offset110] > 0;
+				bool h111 = points[offset111] > 0;
+				if (h000 && h001 && h010 && h011 && h100 && h101 && h110 && h111)
+				{
+					int offset = z * side * side + y * side + x;
+					points[offset] = 0;
+					++cleaned;
 				}
 			}
 		}
+		printf("\r%5.1f %% | cleaned %d points (%.1f %%)",
+			100.0f * (z - 1) / (side - 3),
+			cleaned,
+			100.f * cleaned / pointsCount);
 	}
 	// End
 	clock_t tFinish = clock();
@@ -84,28 +114,37 @@ void Mandelbulb::compute(size_t width, size_t height)
 	printf("\nIt tooks %.3f seconds\n", tDelta);
 }
 
-void Mandelbulb::draw()
+void Mandelbulb::draw(size_t width, size_t height)
 {
-	glBegin(GL_POINTS);
-	for (int z = 0; z < depth; ++z)
+	if (points)
 	{
-		for (int y = 0; y < height; ++y)
+		glBegin(GL_POINTS);
+		int shiftX = (width - side) / 2 - width / 2;
+		int shiftY = (height - side) / 2 - height / 2;
+		int shiftZ = MAX(shiftX, shiftY);
+		for (int z = 0; z < side; ++z)
 		{
-			for (int x = 0; x < width; ++x)
+			for (int y = 0; y < side; ++y)
 			{
-				int i = (z * width * height + y * width + x) * 4;
-				if (points[i + 3] > 0)
+				for (int x = 0; x < side; ++x)
 				{
-					glColor4ub(
-						points[i],
-						points[i + 1],
-						points[i + 2],
-						points[i + 3]
-					);
-					glVertex3f(x, y, z);
+					int i = z * side * side + y * side + x;
+					if (points[i] > 0)
+					{
+						glColor3ub(
+							points[i],
+							points[i],
+							points[i]
+						);
+						glVertex3f(
+							shiftX + x,
+							shiftY + y,
+							shiftZ + z
+						);
+					}
 				}
 			}
 		}
+		glEnd();
 	}
-	glEnd();
 }
