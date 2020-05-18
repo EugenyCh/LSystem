@@ -1,2 +1,22 @@
-﻿  HostMandelbulb3D.cpp
+﻿  Mandelbulb.cpp
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(31,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(31,9): message : рекомендуется использовать "%zd" в строке форматирования
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(34,26): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(42,48): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(57,18): warning C4244: аргумент: преобразование "int" в "const float", возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(85,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(86,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(87,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(88,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(89,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(90,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(91,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(92,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(103,49): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(127,46): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(128,48): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(136,44): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(151,15): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(150,15): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:\Projects\Diplom\HostMandelbulb3D\HostMandelbulb3D\Mandelbulb.cpp(149,15): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
   HostMandelbulb3D.vcxproj -> D:\Projects\Diplom\HostMandelbulb3D\x64\Debug\HostMandelbulb3D.exe

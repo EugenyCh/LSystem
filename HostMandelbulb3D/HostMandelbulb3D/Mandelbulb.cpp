@@ -136,10 +136,14 @@ void Mandelbulb::draw(size_t width, size_t height)
 					int i = z * side * side + y * side + x;
 					if (points[i] > 0)
 					{
+						float k = points[i] / 255.0f;
+						byte kBlue = (byte)(k * 255);
+						byte kGreen = (byte)((k / 2) * 255);
+						byte kRed = (byte)((k / 3) * 255);
 						glColor3ub(
-							points[i],
-							points[i],
-							points[i]
+							kRed,
+							kGreen,
+							kBlue
 						);
 						glVertex3f(
 							shiftX + x,
