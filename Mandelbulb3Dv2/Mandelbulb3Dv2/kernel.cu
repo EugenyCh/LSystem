@@ -1,7 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <GL/freeglut.h>
 #include <GL/freeglut_ext.h>
+#include <FreeImage.h>
 #include <stdio.h>
+#include <time.h>
+#include <fstream>
 #include "Mandelbulb.cuh"
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -13,10 +16,11 @@ float camRotH, camRotV;
 float camShH, camShV; // camera shift
 int mouseOldX = 0;
 int mouseOldY = 0;
-static Mandelbulb mandelbulb(8, 3);
+static Mandelbulb mandelbulb(8, 5);
 unsigned systemList = 0; // display list to draw system
 float zoom = 1.0f;
 int winWidth, winHeight;
+bool saving = false;
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -33,6 +37,7 @@ void init()
 }
 
 void reshape(int, int);
+void saveImage();
 void display()
 {
     reshape(winWidth, winHeight);
@@ -62,6 +67,11 @@ void display()
 
     glPopMatrix();
     glutSwapBuffers();
+    if (saving)
+    {
+        saving = false;
+        saveImage();
+    }
 }
 
 void reshape(int w, int h)
@@ -165,6 +175,10 @@ void processKey(unsigned char key, int x, int y)
         camShH = 0.0f;
         camShV = 0.0f;
         break;
+    case 'S':
+    case 's':
+        saving = true;
+        break;
     case '8':
         camRotV -= 2.0f;
         break;
@@ -182,12 +196,38 @@ void processKey(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
+void saveImage()
+{
+
+    time_t rawtime;
+    struct tm* timeinfo;
+    char buffer[80];
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    strftime(buffer, 80, "screen_%Y.%m.%d_%Hh.%Mm.%Ss.png", timeinfo);
+    puts(buffer);
+
+    size_t width = winWidth;
+    size_t height = winHeight;
+    BYTE* pixels = new BYTE[3 * width * height];
+
+    glReadPixels(0, 0, width, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, pixels);
+
+    // Convert to FreeImage format & save to file
+    FIBITMAP* image = FreeImage_ConvertFromRawBits(pixels, width, height, 3 * width, 24, 0x0000FF, 0xFF0000, 0x00FF00, false);
+    FreeImage_Save(FIF_PNG, image, buffer, 0);
+
+    // Free resources
+    FreeImage_Unload(image);
+    delete[] pixels;
+}
+
 int main(int argc, char* argv[])
 {
     // initialize glut
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(240, 240);
+    glutInitWindowSize(400, 400);
 
     // create window
     glutCreateWindow("Mandelbulb demo");
