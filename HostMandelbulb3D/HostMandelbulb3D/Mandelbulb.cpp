@@ -60,7 +60,7 @@ void Mandelbulb::compute(size_t width, size_t height)
 
 				if (belongs)
 				{
-					points[offset] = 255;
+					points[offset] = (byte)((hz.sqrRadius() / sqrBailout) * 255);
 					++pointsCount;
 				}
 				else
@@ -73,7 +73,9 @@ void Mandelbulb::compute(size_t width, size_t height)
 			100.f * pointsCount / sz);
 	}
 	printf("\nCeaning of points\n");
+	int* pointsToCleaning = new int[pointsCount];
 	int cleaned = 0;
+	int index = 0;
 	for (int z = 1; z < side - 1; ++z)
 	{
 		for (int y = 1; y < side - 1; ++y)
@@ -99,11 +101,13 @@ void Mandelbulb::compute(size_t width, size_t height)
 				if (h000 && h001 && h010 && h011 && h100 && h101 && h110 && h111)
 				{
 					int offset = z * side * side + y * side + x;
-					points[offset] = 0;
+					pointsToCleaning[index++] = offset;
 					++cleaned;
 				}
 			}
 		}
+		for (int i = 0; i < index; ++i)
+			points[i] = 0;
 		printf("\r%5.1f %% | cleaned %d points (%.1f %%)",
 			100.0f * (z - 1) / (side - 3),
 			cleaned,
