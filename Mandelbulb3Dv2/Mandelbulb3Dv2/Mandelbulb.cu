@@ -19,11 +19,13 @@ __global__ void kernel(
 	const float sqrBailout)
 {
 	int offset = threadIdx.x + blockDim.x * blockIdx.x;
-	int z = offset / (side * side);
-	int y = (offset - z) / side;
-	int x = offset % side;
-	if (z >= side)
+	if (offset >= side * side * side)
 		return;
+	int z = offset / (side * side);
+	offset -= z * side * side;
+	int y = offset / side;
+	int x = offset % side;
+	offset += z * side * side;
 
 	// Compute point at this position
 	int halfSide = side >> 1;
@@ -79,7 +81,7 @@ bool Mandelbulb::compute(size_t width, size_t height)
 
 	clock_t tStart, tFinish;
 	double tDelta;
-	printf("Rendering %dx%d\n", width, height);
+	printf("Rendering %d^3\n", side);
 	int threads = 1024;
 	int blocks = (sz + threads - 1) / threads;
 	tStart = clock();
@@ -97,7 +99,7 @@ bool Mandelbulb::compute(size_t width, size_t height)
 	}
 	cudaFree(dev_buffer);
 
-	printf("\nCeaning of points\n");
+	printf("\nCleaning of points\n");
 	tStart = clock();
 	int* pointsToCleaning = new int[sz];
 	int cleaned = 0;
@@ -139,6 +141,7 @@ bool Mandelbulb::compute(size_t width, size_t height)
 	tFinish = clock();
 	tDelta = (double)(tFinish - tStart) / CLOCKS_PER_SEC;
 	printf("\nIt tooks %.3f seconds\n", tDelta);
+	delete[] pointsToCleaning;
 	return true;
 }
 
