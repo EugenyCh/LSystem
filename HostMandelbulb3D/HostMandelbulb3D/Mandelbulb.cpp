@@ -106,13 +106,13 @@ void Mandelbulb::compute(size_t width, size_t height)
 				}
 			}
 		}
-		for (int i = 0; i < index; ++i)
-			points[i] = 0;
 		printf("\r%5.1f %% | cleaned %d points (%.1f %%)",
 			100.0f * (z - 1) / (side - 3),
 			cleaned,
 			100.f * cleaned / pointsCount);
 	}
+	for (int i = 0; i < index; ++i)
+		points[pointsToCleaning[i]] = 0;
 	// End
 	clock_t tFinish = clock();
 	double tDelta = (double)(tFinish - tStart) / CLOCKS_PER_SEC;

@@ -1,5 +1,3 @@
-#include "cuda_runtime.h"
-#include "device_launch_parameters.h"
 #define _CRT_SECURE_NO_WARNINGS
 #include <GL/freeglut.h>
 #include <GL/freeglut_ext.h>

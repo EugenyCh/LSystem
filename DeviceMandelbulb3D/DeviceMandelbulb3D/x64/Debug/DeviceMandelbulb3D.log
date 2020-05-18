@@ -1,0 +1,26 @@
+﻿  Mandelbulb.cu
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(43,15): warning C4244: аргумент: преобразование "const int" в "const float", возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(70,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(70,9): message : рекомендуется использовать "%zd" в строке форматирования
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(82,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(82,9): message : рекомендуется использовать "%zd" в строке форматирования
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(82,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "2" имеет тип "size_t"
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(82,9): message : рекомендуется использовать "%zd" в строке форматирования
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(84,43): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(86,10): error C2059: синтаксическая ошибка: <
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(111,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(112,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(113,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(114,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(115,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(116,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(117,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(118,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(129,49): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(87,2): warning C4996: 'cudaThreadSynchronize': объявлен deprecate
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(150,46): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(151,48): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(159,44): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(174,15): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(173,15): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:\Projects\Diplom\DeviceMandelbulb3D\DeviceMandelbulb3D\Mandelbulb.cu(172,15): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
