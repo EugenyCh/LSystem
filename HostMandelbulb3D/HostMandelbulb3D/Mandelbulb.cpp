@@ -82,6 +82,9 @@ void Mandelbulb::compute(size_t width, size_t height)
 		{
 			for (int x = 1; x < side - 1; ++x)
 			{
+				int offset = z * side * side + y * side + x;
+				if (points[offset] == 0)
+					continue;
 				int offset000 = (z - 1) * side * side + (y - 1) * side + (x - 1);
 				int offset001 = (z - 1) * side * side + (y - 1) * side + (x + 1);
 				int offset010 = (z - 1) * side * side + (y + 1) * side + (x - 1);
@@ -100,7 +103,6 @@ void Mandelbulb::compute(size_t width, size_t height)
 				bool h111 = points[offset111] > 0;
 				if (h000 && h001 && h010 && h011 && h100 && h101 && h110 && h111)
 				{
-					int offset = z * side * side + y * side + x;
 					pointsToCleaning[index++] = offset;
 					++cleaned;
 				}
