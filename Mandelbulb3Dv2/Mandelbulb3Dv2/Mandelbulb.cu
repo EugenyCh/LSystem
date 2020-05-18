@@ -9,6 +9,7 @@
 #include <ctime>
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 #define MIN(a, b) ((a) < (b) ? (b) : (a))
+#define SIDE_MAX 960
 
 __global__ void kernel(
 	byte* buffer,
@@ -65,6 +66,8 @@ bool Mandelbulb::compute(size_t width, size_t height)
 	if (points)
 		delete[] points;
 	side = MIN(width, height);
+	if (side > SIDE_MAX)
+		side = SIDE_MAX;
 
 	const size_t sz = side * side * side;
 	points = new byte[sz];
