@@ -72,7 +72,7 @@ void Mandelbulb::compute(size_t width, size_t height)
 			pointsCount,
 			100.f * pointsCount / sz);
 	}
-	printf("\nCeaning of points\n");
+	printf("\nCleaning of points\n");
 	int* pointsToCleaning = new int[pointsCount];
 	int cleaned = 0;
 	int index = 0;

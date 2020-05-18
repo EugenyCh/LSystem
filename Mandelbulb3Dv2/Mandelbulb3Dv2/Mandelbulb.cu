@@ -11,25 +11,36 @@
 #define MIN(a, b) ((a) < (b) ? (b) : (a))
 #define SIDE_MAX 960
 
+__device__ int side1;
+__device__ int side2;
+__device__ int side3;
+
+__global__ void initVars(const int side)
+{
+	side1 = side;
+	side2 = side * side;
+	side3 = side * side * side;
+}
+
 __global__ void kernel(
 	byte* buffer,
-	const int side,
 	const int n,
 	const int maxIter,
 	const float bailout,
-	const float sqrBailout)
+	const float sqrBailout,
+	int* counterPoints)
 {
 	int offset = threadIdx.x + blockDim.x * blockIdx.x;
-	if (offset >= side * side * side)
+	if (offset >= side3)
 		return;
-	int z = offset / (side * side);
-	offset -= z * side * side;
-	int y = offset / side;
-	int x = offset % side;
-	offset += z * side * side;
+	int z = offset / side2;
+	offset -= z * side2;
+	int y = offset / side1;
+	int x = offset % side1;
+	offset += z * side2;
 
 	// Compute point at this position
-	int halfSide = side >> 1;
+	int halfSide = side1 >> 1;
 	float fx = bailout * (float)(x - halfSide) / halfSide;
 	float fy = bailout * (float)(y - halfSide) / halfSide;
 	float fz = bailout * (float)(z - halfSide) / halfSide;
@@ -48,7 +59,10 @@ __global__ void kernel(
 	}
 
 	if (belongs)
+	{
 		buffer[offset] = (byte)((hz.sqrRadius() / sqrBailout) * 255);
+		atomicAdd(counterPoints, 1);
+	}
 	else
 		buffer[offset] = 0;
 }
@@ -87,22 +101,33 @@ bool Mandelbulb::compute(size_t width, size_t height)
 	printf("Rendering %d^3\n", side);
 	int threads = 1024;
 	int blocks = (sz + threads - 1) / threads;
+	int counterPoints = 0;
+	int* dev_counterPoints;
+	cudaMalloc((void**)&dev_counterPoints, sizeof(int));
+	cudaMemcpy(dev_counterPoints, &counterPoints, sizeof(int), cudaMemcpyHostToDevice);
+	// Start
 	tStart = clock();
-	kernel<<<blocks, threads>>>(dev_buffer, side, n, maxIter, bailout, sqrBailout);
+	initVars << <1, 1 >> > (side);
+	kernel << <blocks, threads >> > (dev_buffer, n, maxIter, bailout, sqrBailout, dev_counterPoints);
 	cudaThreadSynchronize();
 	tFinish = clock();
+	// End
+	cudaMemcpy(&counterPoints, dev_counterPoints, sizeof(int), cudaMemcpyDeviceToHost);
 	tDelta = (double)(tFinish - tStart) / CLOCKS_PER_SEC;
+	printf("Included %d points (%.1f %%)\n",
+		counterPoints,
+		100.f * counterPoints / sz);
 	printf("It tooks %.3f seconds\n", tDelta);
 
-	printf("Moving\n");
 	if (cudaMemcpy((void*)points, dev_buffer, sz, cudaMemcpyDeviceToHost) != cudaSuccess)
 	{
 		printf("Error on getting buffer of pixels from GPU\n");
 		return false;
 	}
 	cudaFree(dev_buffer);
+	cudaFree(dev_counterPoints);
 
-	printf("\nCleaning of points\n");
+	printf("Cleaning of points\n");
 	tStart = clock();
 	int* pointsToCleaning = new int[sz];
 	int cleaned = 0;
@@ -140,10 +165,13 @@ bool Mandelbulb::compute(size_t width, size_t height)
 	}
 	for (int i = 0; i < index; ++i)
 		points[pointsToCleaning[i]] = 0;
+	printf("Cleaned %d points (%.1f %%)\n",
+		cleaned,
+		100.f * cleaned / counterPoints);
 	// End
 	tFinish = clock();
 	tDelta = (double)(tFinish - tStart) / CLOCKS_PER_SEC;
-	printf("\nIt tooks %.3f seconds\n", tDelta);
+	printf("It tooks %.3f seconds\n", tDelta);
 	delete[] pointsToCleaning;
 	return true;
 }
