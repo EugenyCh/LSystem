@@ -56,6 +56,7 @@ void display()
         systemList = glGenLists(1);
 
         glNewList(systemList, GL_COMPILE);
+        mandelbulb.initColorSpectrum();
         mandelbulb.compute(winWidth, winHeight);
         mandelbulb.draw(winWidth, winHeight);
         glEndList();

@@ -61,7 +61,7 @@ __global__ void kernel(
 
 	if (belongs)
 	{
-		buffer[offset] = (byte)(K_FUNCTION(hz.sqrRadius() / sqrBailout) * 255);
+		buffer[offset] = (byte)(hz.sqrRadius() / sqrBailout * 255);
 		atomicAdd(counterPoints, 1);
 	}
 	else
@@ -202,10 +202,10 @@ void Mandelbulb::draw(size_t width, size_t height)
 					int i = z * side * side + y * side + x;
 					if (points[i] > 0)
 					{
-						float k = points[i] / 255.0f;
-						byte kBlue = (byte)(k * 255);
-						byte kGreen = (byte)((k / 2) * 255);
-						byte kRed = (byte)((k / 3) * 255);
+						int k = points[i];
+						byte kRed = colorSpectrum[k][0];
+						byte kGreen = colorSpectrum[k][1];
+						byte kBlue = colorSpectrum[k][2];
 						glColor3ub(
 							kRed,
 							kGreen,
@@ -221,5 +221,19 @@ void Mandelbulb::draw(size_t width, size_t height)
 			}
 		}
 		glEnd();
+	}
+}
+
+void Mandelbulb::initColorSpectrum()
+{
+	for (int i = 0; i < 256; ++i)
+	{
+		float k = K_FUNCTION(i / 255.0f);
+		byte kRed = (byte)((k / 3) * 255);
+		byte kGreen = (byte)((k / 2) * 255);
+		byte kBlue = (byte)(k * 255);
+		colorSpectrum[i][0] = kRed;
+		colorSpectrum[i][1] = kGreen;
+		colorSpectrum[i][2] = kBlue;
 	}
 }
