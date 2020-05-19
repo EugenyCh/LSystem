@@ -16,7 +16,7 @@ float camRotH, camRotV;
 float camShH, camShV; // camera shift
 int mouseOldX = 0;
 int mouseOldY = 0;
-static Mandelbulb mandelbulb(3, 5);
+static Mandelbulb mandelbulb(8, 5);
 unsigned systemList = 0; // display list to draw system
 float zoom = 1.0f;
 int winWidth, winHeight;
