@@ -10,7 +10,6 @@
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 #define MIN(a, b) ((a) < (b) ? (b) : (a))
 #define SIDE_MAX 1000
-#define M_PI_2 1.57079632679489661923
 
 __device__ int side1;
 __device__ int side2;
@@ -230,7 +229,7 @@ void Mandelbulb::initColorSpectrum()
 	{
 		float k = i / 255.0;
 		k = sqrtf(k);
-		k = abs(sinf(k * M_PI_2 * 2));
+		k = 4 * k * (1 - k);
 		float b = 1 - 3 * k * (1 - k);
 
 		byte kRed = (byte)(4 * k * (1 - k) * 255);
