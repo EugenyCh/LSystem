@@ -10,7 +10,7 @@
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 #define MIN(a, b) ((a) < (b) ? (b) : (a))
 #define SIDE_MAX 1000
-#define K_FUNCTION(k) (powf((k), 2.0f))
+#define M_PI_2 1.57079632679489661923
 
 __device__ int side1;
 __device__ int side2;
@@ -61,7 +61,7 @@ __global__ void kernel(
 
 	if (belongs)
 	{
-		buffer[offset] = (byte)(hz.sqrRadius() / sqrBailout * 255);
+		buffer[offset] = (byte)(hc.sqrRadius() / sqrBailout * 255);
 		atomicAdd(counterPoints, 1);
 	}
 	else
@@ -180,7 +180,7 @@ bool Mandelbulb::compute(size_t width, size_t height)
 	// End
 	tFinish = clock();
 	tDelta = (double)(tFinish - tStart) / CLOCKS_PER_SEC;
-	printf("It tooks %.3f seconds\n", tDelta);
+	printf("It tooks %.3f seconds\n\n", tDelta);
 	delete[] pointsToCleaning;
 	return true;
 }
@@ -228,12 +228,17 @@ void Mandelbulb::initColorSpectrum()
 {
 	for (int i = 0; i < 256; ++i)
 	{
-		float k = K_FUNCTION(i / 255.0f);
-		byte kRed = (byte)((k / 3) * 255);
-		byte kGreen = (byte)((k / 2) * 255);
-		byte kBlue = (byte)(k * 255);
-		colorSpectrum[i][0] = kRed;
-		colorSpectrum[i][1] = kGreen;
-		colorSpectrum[i][2] = kBlue;
+		float k = i / 255.0;
+		k = sqrtf(k);
+		k = abs(sinf(k * M_PI_2 * 2));
+		float b = 1 - 3 * k * (1 - k);
+
+		byte kRed = (byte)(4 * k * (1 - k) * 255);
+		byte kGreen = (byte)(k * 127);
+		byte kBlue = (byte)((1 - k) * 255);
+
+		colorSpectrum[i][0] = kRed * b;
+		colorSpectrum[i][1] = kGreen * b;
+		colorSpectrum[i][2] = kBlue * b;
 	}
 }
