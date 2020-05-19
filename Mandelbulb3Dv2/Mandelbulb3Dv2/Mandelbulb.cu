@@ -10,6 +10,7 @@
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 #define MIN(a, b) ((a) < (b) ? (b) : (a))
 #define SIDE_MAX 1000
+#define K_FUNCTION(k) (powf((k), 2.0f))
 
 __device__ int side1;
 __device__ int side2;
@@ -60,7 +61,7 @@ __global__ void kernel(
 
 	if (belongs)
 	{
-		buffer[offset] = (byte)((hz.sqrRadius() / sqrBailout) * 255);
+		buffer[offset] = (byte)(K_FUNCTION(hz.sqrRadius() / sqrBailout) * 255);
 		atomicAdd(counterPoints, 1);
 	}
 	else
@@ -141,6 +142,12 @@ bool Mandelbulb::compute(size_t width, size_t height)
 				int offset = z * side * side + y * side + x;
 				if (points[offset] == 0)
 					continue;
+				else if (points[offset] == 1)
+				{
+					pointsToCleaning[index++] = offset;
+					++cleaned;
+					continue;
+				}
 				int offset000 = (z - 1) * side * side + (y - 1) * side + (x - 1);
 				int offset001 = (z - 1) * side * side + (y - 1) * side + (x + 1);
 				int offset010 = (z - 1) * side * side + (y + 1) * side + (x - 1);
