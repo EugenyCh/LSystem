@@ -33,10 +33,7 @@ __global__ void kernel(byte* buffer, const int side, const float cx, const float
 	float k = (float)i / iters;
 
 	// Setting point color
-	offset *= 3;
 	buffer[offset] = (byte)(k * 255);
-	buffer[offset + 1] = (byte)(k * 255);
-	buffer[offset + 2] = (byte)(k * 255);
 }
 
 Julia2D::Julia2D(float cx, float cy)
@@ -54,10 +51,10 @@ bool Julia2D::compute(size_t width, size_t height, int iters)
 	int side = MAX(width, height);
 
 	const size_t sz = side * side;
-	points = new byte[sz * 3];
+	points = new byte[sz];
 	byte* dev_buffer;
 
-	if (cudaMalloc((void**)&dev_buffer, sz * 3) != cudaSuccess)
+	if (cudaMalloc((void**)&dev_buffer, sz) != cudaSuccess)
 	{
 		printf("Error on creating buffer of pixels in GPU\n");
 		return false;
@@ -74,7 +71,7 @@ bool Julia2D::compute(size_t width, size_t height, int iters)
 	printf("It tooks %.3f seconds\n", tDelta);
 
 	printf("Moving\n");
-	if (cudaMemcpy((void*)points, dev_buffer, sz * 3, cudaMemcpyDeviceToHost) != cudaSuccess)
+	if (cudaMemcpy((void*)points, dev_buffer, sz, cudaMemcpyDeviceToHost) != cudaSuccess)
 	{
 		printf("Error on getting buffer of pixels from GPU\n");
 		return false;
@@ -94,11 +91,11 @@ void Julia2D::draw()
 	{
 		for (int x = 0; x < side; ++x)
 		{
-			int i = (side * y + x) * 3;
+			int i = side * y + x;
 			glColor3ub(
 				points[i],
-				points[i + 1],
-				points[i + 2]
+				points[i],
+				points[i]
 			);
 			glVertex2f(
 				shiftX + x,
