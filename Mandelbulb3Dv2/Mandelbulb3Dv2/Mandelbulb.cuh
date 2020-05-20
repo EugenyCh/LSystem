@@ -4,7 +4,7 @@ typedef unsigned char byte;
 class Mandelbulb
 {
 private:
-	int n;
+	float n;
 	int maxIter;
 	float bailout;
 	float sqrBailout;
@@ -13,7 +13,7 @@ private:
 	byte colorSpectrum[256][3];
 
 public:
-	Mandelbulb(int power, int maxIter);
+	Mandelbulb(float power, int maxIter);
 	bool compute(size_t width, size_t height);
 	void draw(size_t width, size_t height);
 	void initColorSpectrum();

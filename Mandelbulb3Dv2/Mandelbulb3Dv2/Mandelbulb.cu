@@ -24,7 +24,7 @@ __global__ void initVars(const int side)
 
 __global__ void kernel(
 	byte* buffer,
-	const int n,
+	const float n,
 	const int maxIter,
 	const float bailout,
 	const float sqrBailout,
@@ -67,7 +67,7 @@ __global__ void kernel(
 		buffer[offset] = 0;
 }
 
-Mandelbulb::Mandelbulb(int power, int maxIter)
+Mandelbulb::Mandelbulb(float power, int maxIter)
 {
 	this->n = power;
 	this->maxIter = maxIter;
