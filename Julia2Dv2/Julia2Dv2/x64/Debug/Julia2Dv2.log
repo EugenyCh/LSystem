@@ -1,9 +1,6 @@
-﻿  Compiling CUDA source file kernel.cu...
-  Compiling CUDA source file Julia2D.cu...
+﻿  Compiling CUDA source file Julia2D.cu...
   
   D:\Projects\Diplom\Julia2Dv2\Julia2Dv2>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.25.28610\bin\HostX86\x64" -x cu  -ID:\Libs\Cpp\freeglut\include -ID:\Libs\Cpp\FreeImage\x64 -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\Julia2D.cu.obj "D:\Projects\Diplom\Julia2Dv2\Julia2Dv2\Julia2D.cu" 
-  
-  D:\Projects\Diplom\Julia2Dv2\Julia2Dv2>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.25.28610\bin\HostX86\x64" -x cu  -ID:\Libs\Cpp\freeglut\include -ID:\Libs\Cpp\FreeImage\x64 -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "D:\Projects\Diplom\Julia2Dv2\Julia2Dv2\kernel.cu" 
   Julia2D.cu
 D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(49): warning C4244: *=: преобразование "float" в "size_t", возможна потеря данных
 D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(50): warning C4244: *=: преобразование "float" в "size_t", возможна потеря данных
@@ -13,12 +10,7 @@ D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(56): warning C4267: иници
 D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(70): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
 D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(73): warning C4996: 'cudaThreadSynchronize': объявлен deprecate
 D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(122): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(129): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
+D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(130): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
 D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(131): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(132): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/Julia2D.cu(133): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
-  kernel.cu
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/kernel.cu(18): warning C4305: аргумент: усечение из "double" в "float"
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/kernel.cu(64): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/kernel.cu(214): warning C4267: аргумент: преобразование из "size_t" в "GLsizei"; возможна потеря данных
-D:/Projects/Diplom/Julia2Dv2/Julia2Dv2/kernel.cu(217): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
   Julia2Dv2.vcxproj -> D:\Projects\Diplom\Julia2Dv2\x64\Debug\Julia2Dv2.exe

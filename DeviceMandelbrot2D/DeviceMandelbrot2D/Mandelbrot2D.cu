@@ -37,8 +37,13 @@ __global__ void kernel(byte* buffer, const int side, const int iters)
 	buffer[offset] = (byte)(k * 255);
 }
 
-bool Mandelbrot2D::compute(size_t width, size_t height, int iters)
+bool Mandelbrot2D::compute(size_t width, size_t height, int iters, float setScalling)
 {
+	if (setScalling < 1.0)
+		setScalling = 1.0;
+	width *= setScalling;
+	height *= setScalling;
+	this->setScalling = setScalling;
 	if (points)
 		delete[] points;
 	this->width = width;
@@ -87,16 +92,37 @@ void Mandelbrot2D::draw()
 		for (int x = 0; x < side; ++x)
 		{
 			int i = side * y + x;
+			int k = points[i];
+			byte kRed = colorSpectrum[k][0];
+			byte kGreen = colorSpectrum[k][1];
+			byte kBlue = colorSpectrum[k][2];
 			glColor3ub(
-				points[i],
-				points[i],
-				points[i]
+				kRed,
+				kGreen,
+				kBlue
 			);
 			glVertex2f(
-				shiftX + x,
-				shiftY + y
+				(shiftX + x) / setScalling,
+				(shiftY + y) / setScalling
 			);
 		}
 	}
 	glEnd();
+}
+
+void Mandelbrot2D::initColorSpectrum()
+{
+	for (int i = 0; i < 256; ++i)
+	{
+		float k = i / 255.0;
+		float b = sqrtf(k);
+
+		byte kRed = (byte)(k * 255);
+		byte kGreen = (byte)(k * k * 255);
+		byte kBlue = (byte)((1 - 4 * k * (1 - k)) * 255);
+
+		colorSpectrum[i][0] = kRed * b;
+		colorSpectrum[i][1] = kGreen * b;
+		colorSpectrum[i][2] = kBlue * b;
+	}
 }
