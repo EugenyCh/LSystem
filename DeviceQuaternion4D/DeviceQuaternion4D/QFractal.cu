@@ -75,25 +75,25 @@ QFractal::QFractal(float r, float a, float b, float c, QFractal::ParamToHide h, 
 {
 	switch (h)
 	{
-	case QFractal::ParamToHide::R:
+	case QFractal::R:
 		this->q1 = a;
 		this->q2 = b;
 		this->q3 = c;
 		this->q4 = r;
 		break;
-	case QFractal::ParamToHide::A:
+	case QFractal::A:
 		this->q1 = r;
 		this->q2 = b;
 		this->q3 = c;
 		this->q4 = a;
 		break;
-	case QFractal::ParamToHide::B:
+	case QFractal::B:
 		this->q1 = r;
 		this->q2 = a;
 		this->q3 = c;
 		this->q4 = b;
 		break;
-	case QFractal::ParamToHide::C:
+	case QFractal::C:
 		this->q1 = r;
 		this->q2 = a;
 		this->q3 = b;
