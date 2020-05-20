@@ -16,7 +16,7 @@ float camRotH, camRotV;
 float camShH, camShV; // camera shift
 int mouseOldX = 0;
 int mouseOldY = 0;
-static QFractal qfractal(-0.65, -0.5, 0.0, 0.0, 5);
+static QFractal qfractal(-0.65, -0.5, 0.0, 0.0, QFractal::C, 15);
 unsigned systemList = 0; // display list to draw system
 float zoom = 1.0f;
 int winWidth, winHeight;

@@ -24,10 +24,10 @@ __global__ void initVars(const int side)
 
 __global__ void kernel(
 	byte* buffer,
-	const float qR,
-	const float qA,
-	const float qB,
-	const float qC,
+	const float q1,
+	const float q2,
+	const float q3,
+	const float q4,
 	const int maxIter,
 	const float bailout,
 	const float sqrBailout,
@@ -47,8 +47,8 @@ __global__ void kernel(
 	float fr = bailout * (float)(x - halfSide) / halfSide;
 	float fa = bailout * (float)(y - halfSide) / halfSide;
 	float fb = bailout * (float)(z - halfSide) / halfSide;
-	float fc = qC;
-	Quaternion qc(qR, qA, qB, qC);
+	float fc = q4;
+	Quaternion qc(q1, q2, q3, q4);
 	Quaternion qv(fr, fa, fb, fc);
 
 	// Iterating
@@ -71,12 +71,35 @@ __global__ void kernel(
 		buffer[offset] = 0;
 }
 
-QFractal::QFractal(float r, float a, float b, float c, int maxIter)
+QFractal::QFractal(float r, float a, float b, float c, QFractal::ParamToHide h, int maxIter)
 {
-	this->qR = r;
-	this->qA = a;
-	this->qB = b;
-	this->qC = c;
+	switch (h)
+	{
+	case QFractal::ParamToHide::R:
+		this->q1 = a;
+		this->q2 = b;
+		this->q3 = c;
+		this->q4 = r;
+		break;
+	case QFractal::ParamToHide::A:
+		this->q1 = r;
+		this->q2 = b;
+		this->q3 = c;
+		this->q4 = a;
+		break;
+	case QFractal::ParamToHide::B:
+		this->q1 = r;
+		this->q2 = a;
+		this->q3 = c;
+		this->q4 = b;
+		break;
+	case QFractal::ParamToHide::C:
+		this->q1 = r;
+		this->q2 = a;
+		this->q3 = b;
+		this->q4 = c;
+		break;
+	}
 	this->maxIter = maxIter;
 	this->bailout = 2.0f;
 	this->sqrBailout = 4.0f;
@@ -115,7 +138,7 @@ bool QFractal::compute(size_t width, size_t height)
 	// Start
 	tStart = clock();
 	initVars << <1, 1 >> > (side);
-	kernel << <blocks, threads >> > (dev_buffer, qR, qA, qB, qC, maxIter, bailout, sqrBailout, dev_counterPoints);
+	kernel << <blocks, threads >> > (dev_buffer, q1, q2, q3, q4, maxIter, bailout, sqrBailout, dev_counterPoints);
 	cudaThreadSynchronize();
 	tFinish = clock();
 	// End
@@ -237,6 +260,7 @@ void QFractal::initColorSpectrum()
 	{
 		float k = 1.0 * i / 255.0;
 		k = sqrtf(k);
+		k = 4 * k * (1 - k);
 		k = 4 * k * (1 - k);
 		k = 4 * k * (1 - k);
 		float b = 1 - 3 * k * (1 - k);
