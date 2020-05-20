@@ -7,20 +7,18 @@
 #include <stdio.h>
 #include <time.h>
 
-__global__ void kernel(byte* buffer, const int width, const int height, const float cx, const float cy, const int iters)
+__global__ void kernel(byte* buffer, const int side, const float cx, const float cy, const int iters)
 {
 	int offset = threadIdx.x + blockDim.x * blockIdx.x;
-	int x = offset % width;
-	int y = offset / width;
-	if (y >= height)
+	if (offset >= side * side)
 		return;
+	int x = offset % side;
+	int y = offset / side;
 
 	// Compute point at this position
-	int halfWidth = width >> 1;
-	int halfHeight = height >> 1;
-	int halfSide = MAX(halfWidth, halfHeight);
-	float jx = 2.0f * (float)(x - halfWidth) / halfSide;
-	float jy = 2.0f * (float)(y - halfHeight) / halfSide;
+	int halfSide = side >> 1;
+	float jx = 2.0f * (float)(x - halfSide) / halfSide;
+	float jy = 2.0f * (float)(y - halfSide) / halfSide;
 	cuComplex c(cx, cy);
 	cuComplex z(jx, jy);
 
@@ -49,15 +47,13 @@ Julia2D::Julia2D(float cx, float cy)
 
 bool Julia2D::compute(size_t width, size_t height, int iters)
 {
-	width *= 2;
-	height *= 2;
 	if (points)
 		delete[] points;
 	this->width = width;
 	this->height = height;
 	int side = MAX(width, height);
 
-	const size_t sz = width * height;
+	const size_t sz = side * side;
 	points = new byte[sz * 3];
 	byte* dev_buffer;
 
@@ -67,11 +63,11 @@ bool Julia2D::compute(size_t width, size_t height, int iters)
 		return false;
 	}
 
-	printf("Rendering %dx%d\n", width, height);
+	printf("Rendering %d^2\n", side);
 	int threads = 1024;
 	int blocks = (sz + threads - 1) / threads;
 	clock_t tStart = clock();
-	kernel<<<blocks, threads>>>(dev_buffer, width, height, cx, cy, 200);
+	kernel<<<blocks, threads>>>(dev_buffer, side, cx, cy, 200);
 	cudaThreadSynchronize();
 	clock_t tFinish = clock();
 	double tDelta = (double)(tFinish - tStart) / CLOCKS_PER_SEC;
@@ -91,17 +87,23 @@ bool Julia2D::compute(size_t width, size_t height, int iters)
 void Julia2D::draw()
 {
 	glBegin(GL_POINTS);
-	for (int y = 0; y < height; ++y)
+	int side = MAX(width, height);
+	int shiftX = (width - side) / 2 - width / 2;
+	int shiftY = (height - side) / 2 - height / 2;
+	for (int y = 0; y < side; ++y)
 	{
-		for (int x = 0; x < width; ++x)
+		for (int x = 0; x < side; ++x)
 		{
-			int i = (width * y + x) * 3;
+			int i = (side * y + x) * 3;
 			glColor3ub(
 				points[i],
 				points[i + 1],
 				points[i + 2]
 			);
-			glVertex2f(x * 0.5, y * 0.5);
+			glVertex2f(
+				shiftX + x,
+				shiftY + y
+			);
 		}
 	}
 	glEnd();
