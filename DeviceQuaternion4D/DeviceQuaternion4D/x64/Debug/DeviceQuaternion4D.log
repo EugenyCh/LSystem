@@ -1,1 +1,40 @@
-﻿  DeviceQuaternion4D.vcxproj -> D:\Projects\Diplom\DeviceQuaternion4D\x64\Debug\DeviceQuaternion4D.exe
+﻿  Compiling CUDA source file QFractal.cu...
+  
+  D:\Projects\Diplom\DeviceQuaternion4D\DeviceQuaternion4D>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\bin\nvcc.exe" -gencode=arch=compute_30,code=\"sm_30,compute_30\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.25.28610\bin\HostX86\x64" -x cu  -ID:\Libs\Cpp\freeglut\include -ID:\Libs\Cpp\FreeImage\x64 -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\QFractal.cu.obj "D:\Projects\Diplom\DeviceQuaternion4D\DeviceQuaternion4D\QFractal.cu" 
+D:\Projects\Diplom\DeviceQuaternion4D\DeviceQuaternion4D\Quaternion.cuh(33): warning : invalid narrowing conversion from "double" to "float"
+  
+D:\Projects\Diplom\DeviceQuaternion4D\DeviceQuaternion4D\Quaternion.cuh(34): warning : invalid narrowing conversion from "double" to "float"
+  
+D:\Projects\Diplom\DeviceQuaternion4D\DeviceQuaternion4D\Quaternion.cuh(35): warning : invalid narrowing conversion from "double" to "float"
+  
+D:\Projects\Diplom\DeviceQuaternion4D\DeviceQuaternion4D\Quaternion.cuh(33): warning : invalid narrowing conversion from "double" to "float"
+  
+D:\Projects\Diplom\DeviceQuaternion4D\DeviceQuaternion4D\Quaternion.cuh(34): warning : invalid narrowing conversion from "double" to "float"
+  
+D:\Projects\Diplom\DeviceQuaternion4D\DeviceQuaternion4D\Quaternion.cuh(35): warning : invalid narrowing conversion from "double" to "float"
+  
+  QFractal.cu
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(119): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+  D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(119): note: рекомендуется использовать "%zd" в строке форматирования
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(131): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+  D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(131): note: рекомендуется использовать "%zd" в строке форматирования
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(133): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(140): warning C4267: аргумент: преобразование из "size_t" в "const int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(171): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(180): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(181): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(182): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(183): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(184): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(185): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(186): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(187): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(142): warning C4996: 'cudaThreadSynchronize': объявлен deprecate
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(223): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(224): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(232): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(244): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(244): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(244): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(282): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+  DeviceQuaternion4D.vcxproj -> D:\Projects\Diplom\DeviceQuaternion4D\x64\Debug\DeviceQuaternion4D.exe
