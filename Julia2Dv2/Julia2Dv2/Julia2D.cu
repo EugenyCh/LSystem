@@ -42,8 +42,13 @@ Julia2D::Julia2D(float cx, float cy)
 	this->cy = cy;
 }
 
-bool Julia2D::compute(size_t width, size_t height, int iters)
+bool Julia2D::compute(size_t width, size_t height, int iters, float setScalling)
 {
+	if (setScalling < 1.0)
+		setScalling = 1.0;
+	width *= setScalling;
+	height *= setScalling;
+	this->setScalling = setScalling;
 	if (points)
 		delete[] points;
 	this->width = width;
@@ -64,7 +69,7 @@ bool Julia2D::compute(size_t width, size_t height, int iters)
 	int threads = 1024;
 	int blocks = (sz + threads - 1) / threads;
 	clock_t tStart = clock();
-	kernel<<<blocks, threads>>>(dev_buffer, side, cx, cy, 200);
+	kernel<<<blocks, threads>>>(dev_buffer, side, cx, cy, iters);
 	cudaThreadSynchronize();
 	clock_t tFinish = clock();
 	double tDelta = (double)(tFinish - tStart) / CLOCKS_PER_SEC;
@@ -92,16 +97,39 @@ void Julia2D::draw()
 		for (int x = 0; x < side; ++x)
 		{
 			int i = side * y + x;
+			int k = points[i];
+			byte kRed = colorSpectrum[k][0];
+			byte kGreen = colorSpectrum[k][1];
+			byte kBlue = colorSpectrum[k][2];
 			glColor3ub(
-				points[i],
-				points[i],
-				points[i]
+				kRed,
+				kGreen,
+				kBlue
 			);
 			glVertex2f(
-				shiftX + x,
-				shiftY + y
+				(shiftX + x) / setScalling,
+				(shiftY + y) / setScalling
 			);
 		}
 	}
 	glEnd();
+}
+
+void Julia2D::initColorSpectrum()
+{
+	for (int i = 0; i < 256; ++i)
+	{
+		float k = i / 255.0;
+		k = sqrtf(k);
+		k = 4 * k * (1 - k);
+		float b = 1 - 3 * k * (1 - k);
+
+		byte kRed = (byte)(4 * k * (1 - k) * 255);
+		byte kGreen = (byte)(k * 127);
+		byte kBlue = (byte)((1 - k) * 255);
+
+		colorSpectrum[i][0] = kRed * b;
+		colorSpectrum[i][1] = kGreen * b;
+		colorSpectrum[i][2] = kBlue * b;
+	}
 }

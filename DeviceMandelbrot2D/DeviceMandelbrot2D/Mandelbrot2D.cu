@@ -59,7 +59,7 @@ bool Mandelbrot2D::compute(size_t width, size_t height, int iters)
 	int threads = 1024;
 	int blocks = (sz + threads - 1) / threads;
 	clock_t tStart = clock();
-	kernel << <blocks, threads >> > (dev_buffer, side, 200);
+	kernel << <blocks, threads >> > (dev_buffer, side, iters);
 	cudaThreadSynchronize();
 	clock_t tFinish = clock();
 	double tDelta = (double)(tFinish - tStart) / CLOCKS_PER_SEC;
