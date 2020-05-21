@@ -6,7 +6,7 @@
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 
 float rotX = 0;
-float rotY = -90;
+float rotY = 90;
 float rotZ = 90;
 float camRotH, camRotV;
 float camShH, camShV; // camera shift
@@ -50,14 +50,13 @@ void display()
         systemList = glGenLists(1);
 
         glNewList(systemList, GL_COMPILE);
-        julia.compute(winWidth, winHeight, 200);
+        julia.compute(winWidth, winHeight, 200, 2.0);
         julia.draw();
         glEndList();
     }
 
-    float sizeMax = MAX(winWidth, winHeight);
-    glScalef(6 / sizeMax, 6 / sizeMax, 6 / sizeMax);
-    glTranslatef(-winWidth / 2, -winHeight / 2, 0);
+    float scale = 5.0 / MIN(winWidth, winHeight);
+    glScalef(scale, scale, scale);
     glCallList(systemList);
 
     glPopMatrix();

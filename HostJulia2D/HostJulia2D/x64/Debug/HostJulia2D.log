@@ -1,6 +1,4 @@
 ﻿  HostJulia2D.cpp
 D:\Projects\Diplom\HostJulia2D\HostJulia2D\HostJulia2D.cpp(15,34): warning C4305: аргумент: усечение из "double" в "float"
-D:\Projects\Diplom\HostJulia2D\HostJulia2D\HostJulia2D.cpp(58,19): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
-D:\Projects\Diplom\HostJulia2D\HostJulia2D\HostJulia2D.cpp(60,44): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
-D:\Projects\Diplom\HostJulia2D\HostJulia2D\HostJulia2D.cpp(60,28): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:\Projects\Diplom\HostJulia2D\HostJulia2D\HostJulia2D.cpp(58,17): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
   HostJulia2D.vcxproj -> D:\Projects\Diplom\HostJulia2D\x64\Debug\HostJulia2D.exe

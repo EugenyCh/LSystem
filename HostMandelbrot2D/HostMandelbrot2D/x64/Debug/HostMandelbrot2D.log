@@ -1,0 +1,7 @@
+﻿  Mandelbrot2D.cpp
+D:\Projects\Diplom\HostMandelbrot2D\HostMandelbrot2D\Mandelbrot2D.cpp(12,22): warning C4244: *=: преобразование "float" в "size_t", возможна потеря данных
+D:\Projects\Diplom\HostMandelbrot2D\HostMandelbrot2D\Mandelbrot2D.cpp(13,23): warning C4244: *=: преобразование "float" в "size_t", возможна потеря данных
+D:\Projects\Diplom\HostMandelbrot2D\HostMandelbrot2D\Mandelbrot2D.cpp(17,21): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbrot2D\HostMandelbrot2D\Mandelbrot2D.cpp(18,23): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostMandelbrot2D\HostMandelbrot2D\Mandelbrot2D.cpp(19,31): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  HostMandelbrot2D.vcxproj -> D:\Projects\Diplom\HostMandelbrot2D\x64\Debug\HostMandelbrot2D.exe
