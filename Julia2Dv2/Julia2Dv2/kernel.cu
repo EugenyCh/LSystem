@@ -9,13 +9,13 @@
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 
 float rotX = 0;
-float rotY = -90;
+float rotY = 90;
 float rotZ = 90;
 float camRotH, camRotV;
 float camShH, camShV; // camera shift
 int mouseOldX = 0;
 int mouseOldY = 0;
-static Julia2D julia(-0.8, 0.156);
+static Julia2D julia(-0.743643887037151, 0.13182590420533);
 unsigned systemList = 0; // display list to draw system
 float zoom = 1.0f;
 int winWidth, winHeight;
@@ -56,7 +56,7 @@ void display()
 
         glNewList(systemList, GL_COMPILE);
         julia.initColorSpectrum();
-        julia.compute(winWidth, winHeight, 200, 2.0);
+        julia.compute(winWidth, winHeight, 500, 2.0);
         julia.draw();
         glEndList();
     }
