@@ -1,0 +1,28 @@
+﻿  QFractal.cpp
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.h(16): warning C4091: static : пропускается слева от "QFractal::ParamToHide", когда ни одна переменная не объявлена
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(59,9): warning C4477: "printf": в строке форматирования "%d" требуется аргумент типа "int", но вариативный аргумент "1" имеет тип "size_t"
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(59,9): message : рекомендуется использовать "%zd" в строке форматирования
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(61,26): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(62,18): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(63,25): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(64,32): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(127,48): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(136,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(137,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(138,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(139,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(140,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(141,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(142,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(143,69): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(177,46): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(178,48): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(186,44): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(201,15): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(200,15): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(199,15): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(215,11): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(226,30): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(227,32): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
+D:\Projects\Diplom\HostQuaternion4D\HostQuaternion4D\QFractal.cpp(228,31): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
+  HostQuaternion4D.vcxproj -> D:\Projects\Diplom\HostQuaternion4D\x64\Debug\HostQuaternion4D.exe
