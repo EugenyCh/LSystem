@@ -36,9 +36,8 @@ D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(232): warni
 D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(244): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
 D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(244): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
 D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(244): warning C4244: аргумент: преобразование "int" в "GLfloat", возможна потеря данных
-D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(302): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(307): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(313): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
-D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(314): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
-D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(315): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(323): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(334): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(335): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
+D:/Projects/Diplom/DeviceQuaternion4D/DeviceQuaternion4D/QFractal.cu(336): warning C4244: =: преобразование "float" в "byte", возможна потеря данных
   DeviceQuaternion4D.vcxproj -> D:\Projects\Diplom\DeviceQuaternion4D\x64\Debug\DeviceQuaternion4D.exe
