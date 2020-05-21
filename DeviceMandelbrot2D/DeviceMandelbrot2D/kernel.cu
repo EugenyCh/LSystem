@@ -9,7 +9,7 @@
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 
 float rotX = 0;
-float rotY = -90;
+float rotY = 90;
 float rotZ = 90;
 float camRotH, camRotV;
 float camShH, camShV; // camera shift

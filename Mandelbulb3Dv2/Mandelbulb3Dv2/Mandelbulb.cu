@@ -242,6 +242,24 @@ void Mandelbulb::draw(size_t width, size_t height)
 //	}
 //}
 
+//void Mandelbulb::initColorSpectrum()
+//{
+//	for (int i = 0; i < 256; ++i)
+//	{
+//		float k = i / 255.0;
+//		k = sqrtf(k);
+//		k = 4 * k * (1 - k);
+//
+//		byte kRed = (byte)(k * 255);
+//		byte kGreen = (byte)(k * k * 255);
+//		byte kBlue = (byte)((1 - 4 * k * (1 - k)) * 255);
+//
+//		colorSpectrum[i][0] = kRed;
+//		colorSpectrum[i][1] = kGreen;
+//		colorSpectrum[i][2] = kBlue;
+//	}
+//}
+
 void Mandelbulb::initColorSpectrum()
 {
 	for (int i = 0; i < 256; ++i)
@@ -249,13 +267,14 @@ void Mandelbulb::initColorSpectrum()
 		float k = i / 255.0;
 		k = sqrtf(k);
 		k = 4 * k * (1 - k);
+		float b = 1 - k * 0.3;
 
-		byte kRed = (byte)(k * 255);
-		byte kGreen = (byte)(k * k * 255);
-		byte kBlue = (byte)((1 - 4 * k * (1 - k)) * 255);
+		byte kRed = (byte)((k < 0.5 ? 2 * k : (k < 0.75 ? 1.0 : 3.25 - 3 * k)) * 255);
+		byte kGreen = (byte)((k < 0.5 ? 2 * k : (k < 0.75 ? 1.5 - k : 2.25 - 2 * k)) * 255);
+		byte kBlue = (byte)((k < 0.5 ? 1 : 2 - 2 * k) * 255);
 
-		colorSpectrum[i][0] = kRed;
-		colorSpectrum[i][1] = kGreen;
-		colorSpectrum[i][2] = kBlue;
+		colorSpectrum[i][0] = kRed * b;
+		colorSpectrum[i][1] = kGreen * b;
+		colorSpectrum[i][2] = kBlue * b;
 	}
 }
